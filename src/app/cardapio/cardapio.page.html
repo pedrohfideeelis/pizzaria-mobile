@@ -13,5 +13,13 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Cardápio"></app-explore-container>
+  <div *ngFor="let pizza of pizzas">
+    <app-pizza-card
+      [name]="pizza.name"
+      [imageUrl]="pizza.imageUrl"
+      [price]="pizza.price"
+      [description]="pizza.description"
+      [showDescription]="false"
+    ></app-pizza-card>
+  </div>
 </ion-content>
