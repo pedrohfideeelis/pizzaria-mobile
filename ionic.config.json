@@ -1,0 +1,7 @@
+{
+  "name": "pizzaria-vovo-beth",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,25 @@
+ion-tab-bar {
+    background-color: #f8931f;
+}
+
+ion-tab-button {
+    --color: #fff;
+    --color-selected: #C2272D;
+    --ripped-color: #f9af3d;
+    background-color: #f8931f;
+
+    transition: font-weight 0.2s ease-in-out;
+
+    &.tab-selected {
+        font-weight: 900;
+
+        ion-label {
+            font-weight: 900;
+        }
+    }
+
+    ion-label {
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+    }
+}
