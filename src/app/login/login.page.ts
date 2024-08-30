@@ -38,4 +38,19 @@ export class LoginPage implements OnInit {
       }
     }
   }
+
+  // Função para navegar para a página de "Esqueci minha senha"
+  navigateToForgotPassword() {
+    this.navCtrl.navigateForward('/forgot-password');
+  }
+
+  // Função para navegar para a página de "Cadastro"
+  navigateToRegister() {
+    this.navCtrl.navigateForward('/register');
+  }
+
+  // Função para voltar à página de "Welcome"
+  navigateBackToWelcome() {
+    this.navCtrl.navigateBack('/welcome');
+  }
 }

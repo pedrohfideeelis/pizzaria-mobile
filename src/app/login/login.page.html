@@ -1,19 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content slot="fixed">
+  <div class="login-container" slot="fixed">
+    <div class="header" slot="fixed">
+      <ion-button fill="clear" class="back-button" (click)="navigateBackToWelcome()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <h1>Login</h1>
+    </div>
 
-<ion-content padding>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input formControlName="email" type="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Senha</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
-    </ion-item>
-    <ion-button expand="full" type="submit" [disabled]="!loginForm.valid">Login</ion-button>
-  </form>
+    <img src="assets/images/PIZZA_LOGO_ICON.png" alt="Logo Icon" class="logo" slot="fixed">
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" slot="fixed">
+      <ion-item slot="fixed">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input formControlName="email" type="email" placeholder="Email" [clearInput]="true"
+          labelPlacement="stacked"></ion-input>
+      </ion-item>
+
+      <ion-item slot="fixed">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input formControlName="password" type="password" placeholder="Senha" [clearInput]="true"
+          labelPlacement="stacked"></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" type="submit" [disabled]="!loginForm.valid" shape="round">Login</ion-button>
+    </form>
+
+    <div class="forgot-password" (click)="navigateToForgotPassword()">Esqueci minha senha</div>
+
+    <div class="register" (click)="navigateToRegister()">Ainda não tenho cadastro</div>
+  </div>
 </ion-content>
