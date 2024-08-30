@@ -7,7 +7,7 @@
       <h1>Login</h1>
     </div>
 
-    <img src="assets/images/PIZZA_LOGO_ICON.png" alt="Logo Icon" class="logo" slot="fixed">
+    <img src="assets/images/PIZZA_LOGO_ICON.svg" alt="Logo Icon" class="logo" slot="fixed">
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" slot="fixed">
       <ion-item slot="fixed">
@@ -22,7 +22,7 @@
           labelPlacement="stacked"></ion-input>
       </ion-item>
 
-      <ion-button expand="full" type="submit" [disabled]="!loginForm.valid" shape="round">Login</ion-button>
+      <ion-button class="login-button" expand="full" type="submit" [disabled]="!loginForm.valid" shape="round">Login</ion-button>
     </form>
 
     <div class="forgot-password" (click)="navigateToForgotPassword()">Esqueci minha senha</div>

@@ -49,6 +49,7 @@ ion-content {
 
         form {
             --border-radius: 50px;
+            --label-color: #fff;
         }
 
         ion-item {
@@ -61,14 +62,20 @@ ion-content {
             --highlight-color-valid: #C2272D;
             --highlight-color-invalid: #C2272D;
             --border-color: transparent;
+            --border-radius: 50px;
 
             ion-icon {
                 color: white;
+
             }
 
             ion-input {
                 --placeholder-color: rgba(255, 255, 255, 0.7);
                 width: 1000px;
+
+                ::ng-deep .input-clear-icon {
+                    color: white !important;
+                }
             }
         }
 
@@ -78,7 +85,7 @@ ion-content {
             margin-top: 20px;
             color: white;
             font-weight: bold;
-            --background-focused: #700B0F;
+            --background: #700B0F;
         }
 
         .forgot-password,

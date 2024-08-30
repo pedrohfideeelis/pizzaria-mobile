@@ -27,6 +27,7 @@ ion-content.welcome-content {
 
     .logo-icon {
         width: 50%;
+        margin-top: 100px;
         height: auto;
         border-radius: 50%;
     }
@@ -53,6 +54,7 @@ ion-content.welcome-content {
         width: 200px;
         margin-bottom: 15px;
         --background-activated: #700B0F;
+        font-weight: bold;
     }
 
     ion-button.register-button {
@@ -60,5 +62,6 @@ ion-content.welcome-content {
         color: white;
         width: 200px;
         --background-activated: #E08520;
+        font-weight: bold;
     }
 }
