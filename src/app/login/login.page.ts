@@ -23,12 +23,17 @@ export class LoginPage implements OnInit {
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value ?? '';
       const password = this.loginForm.get('password')?.value ?? '';
-
-      const storedData = localStorage.getItem('userData');
+  
+      // Obtém os usuários cadastrados
+      const storedData = localStorage.getItem('users');
       if (storedData) {
-        const userData = JSON.parse(storedData);
-        if (userData.email === email && userData.password === password) {
-          localStorage.setItem('loggedInUser', JSON.stringify(userData));
+        const users = JSON.parse(storedData);
+  
+        // Procura um usuário que corresponda ao email e senha fornecidos
+        const user = users.find((u: any) => u.email === email && u.password === password);
+  
+        if (user) {
+          localStorage.setItem('loggedInUser', JSON.stringify(user));
           this.navCtrl.navigateRoot('/tabs'); // Redireciona para a página inicial após o login
         } else {
           alert('Credenciais inválidas');
@@ -37,5 +42,5 @@ export class LoginPage implements OnInit {
         alert('Nenhum usuário registrado');
       }
     }
-  }
+  }  
 }
