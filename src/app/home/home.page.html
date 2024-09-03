@@ -1,6 +1,20 @@
 <ion-content [fullscreen]="true">
+  <div class="welcome-container">
+    <h1>Seja bem-vindo, usuário!</h1>
+    <ion-searchbar placeholder="Buscar pizza..." animated="true"></ion-searchbar>
+  </div>
 
-  <ion-searchbar animated="true" placeholder="Pesquisar"></ion-searchbar>
+  <div class="promocoes">
+    <img src="../../assets/images/BANNER.svg" alt="Banner">
+  </div>
 
-  <app-explore-container name="Home"></app-explore-container>
+  <div class="cardapio">
+    <h2>Cardápio</h2>
+    <div class="cardapio-grid">
+      <div *ngFor="let pizza of pizzas">
+        <app-pizza-card [name]="pizza.name" [imageUrl]="pizza.imageUrl" [price]="pizza.price"
+          [showDescription]="false"></app-pizza-card>
+      </div>
+    </div>
+  </div>
 </ion-content>

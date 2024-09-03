@@ -1,0 +1,28 @@
+ion-content {
+    --background: #dadada;
+
+    h1 {
+        padding: 20px 0 0 20px;
+        font-size: 20px;
+    }
+}
+
+.promocoes {
+    img {
+        width: 360px;
+        padding: 20px 0 0 15px;
+    }
+}
+
+.cardapio {
+    h2 {
+        padding-top: 10px;
+        text-align: center;
+    }
+
+    .cardapio-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0px;
+    }
+}
