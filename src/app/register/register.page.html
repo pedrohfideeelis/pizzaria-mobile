@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Registro</ion-title>
+    <ion-title>Cadastro</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,30 +10,54 @@
       <ion-label position="floating">Nome</ion-label>
       <ion-input formControlName="name"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">CPF</ion-label>
-      <ion-input formControlName="cpf"></ion-input>
+      <ion-input
+        formControlName="cpf"
+        type="text"
+        maxlength="14"
+        (ionInput)="formatCPF($event)">
+      </ion-input>
     </ion-item>
+    <ion-note *ngIf="registerForm.get('cpf')?.invalid && (registerForm.get('cpf')?.touched || registerForm.get('cpf')?.dirty)" color="danger">
+      CPF inválido. Por favor, insira um CPF válido.
+    </ion-note>
+
     <ion-item>
       <ion-label position="floating">Telefone</ion-label>
-      <ion-input formControlName="phone"></ion-input>
+      <ion-input
+        formControlName="phone"
+        type="tel"
+        (ionInput)="formatPhone($event)">
+      </ion-input>
     </ion-item>
+    <ion-note
+      *ngIf="registerForm.get('phone')?.invalid && (registerForm.get('phone')?.touched || registerForm.get('phone')?.dirty)"
+      color="danger">
+      Telefone inválido. Por favor, insira um telefone válido.
+    </ion-note>
+
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input formControlName="email" type="email"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">Endereço</ion-label>
       <ion-input formControlName="address"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">Senha</ion-label>
       <ion-input formControlName="password" type="password"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">Confirmar Senha</ion-label>
       <ion-input formControlName="confirmPassword" type="password"></ion-input>
     </ion-item>
+
     <ion-button expand="full" type="submit" [disabled]="!registerForm.valid">Registrar</ion-button>
   </form>
 </ion-content>
