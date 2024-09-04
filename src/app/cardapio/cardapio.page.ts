@@ -37,5 +37,6 @@ export class Cardapio {
       price: 29.99,
       description: 'Massa de alga e arroz, molho shoyo, sushi de salmão, sashimi, brócolis e tomate'
     }
-  ]
+  ];
+  
 }

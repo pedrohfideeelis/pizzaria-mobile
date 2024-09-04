@@ -34,6 +34,7 @@ export class LoginPage implements OnInit {
   
         if (user) {
           localStorage.setItem('loggedInUser', JSON.stringify(user));
+          
           this.navCtrl.navigateRoot('/tabs'); // Redireciona para a página inicial após o login
         } else {
           alert('Credenciais inválidas');
