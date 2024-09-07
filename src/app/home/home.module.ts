@@ -6,6 +6,7 @@ import { Home } from './home.page';
 import { PizzaCardModule } from '../cardapio/pizza-card/pizza-card.module';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { CardapioPageModule } from '../cardapio/cardapio.module';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     HomePageRoutingModule,
-    PizzaCardModule
+    PizzaCardModule,
+    CardapioPageModule
   ],
   declarations: [Home]
 })

@@ -6,6 +6,7 @@ import { Cardapio } from './cardapio.page';
 import {PizzaCardModule} from "./pizza-card/pizza-card.module"
 
 import { CardapioPageRoutingModule } from './cardapio-routing.module';
+import { PizzaModalComponent } from './pizza-modal/pizza-modal.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { CardapioPageRoutingModule } from './cardapio-routing.module';
     CardapioPageRoutingModule,
     PizzaCardModule
   ],
-  declarations: [Cardapio]
+  declarations: [Cardapio, PizzaModalComponent],
+  exports: [PizzaModalComponent]
 })
 export class CardapioPageModule {}

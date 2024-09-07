@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <div *ngFor="let pizza of pizzas">
+  <div *ngFor="let pizza of pizzas" (click)="openModal(pizza)">
     <app-pizza-card
       [name]="pizza.name"
       [imageUrl]="pizza.imageUrl"
