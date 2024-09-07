@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Home } from './home.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { PizzaCardModule } from '../cardapio/pizza-card/pizza-card.module';
 
 import { HomePageRoutingModule } from './home-routing.module';
@@ -13,7 +12,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     HomePageRoutingModule,
     PizzaCardModule
   ],
