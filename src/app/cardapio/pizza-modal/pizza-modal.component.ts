@@ -8,38 +8,59 @@ import { ModalController } from '@ionic/angular';
 })
 export class PizzaModalComponent {
   @Input() pizza: any;
-  selectedSize: string = ' M';
+  selectedSize: string = 'M';
   quantity: number = 1;
   notes: string = '';
-  totalPrice: number = 0;
+  price: number = 57.9;
+  totalPrice: number = this.price;
 
-  constructor(private modalCtrl: ModalController){}
+  constructor(private modalCtrl: ModalController) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.updatePrice();
   }
 
-  updatePrice(){
-    const sizeMultiplier = this.selectedSize === 'M' ? 1 : this.selectedSize === 'P' ? 1.5 : 2;
-    this.totalPrice = this.pizza.price * sizeMultiplier * this.quantity;
+  selectSize(size: string) {
+    this.selectedSize = size;
+    this.updatePrice();
   }
 
-  cancel(){
+  updatePrice() {
+    switch (this.selectedSize) {
+      case 'P':
+        this.price = 37.9;
+        break;
+      case 'M':
+        this.price = 57.9;
+        break;
+      case 'G':
+        this.price = 87.9;
+        break;
+      default:
+        this.price = 37.9;
+    }
+    this.totalPrice = this.price * this.quantity;
+  }
+
+  cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  addToCart(){
-    return this.modalCtrl.dismiss({
-      pizza: this.pizza,
-      size: this.selectedSize,
-      quantity: this.quantity,
-      notes: this.notes,
-      totalPrice: this.totalPrice
-    }, 'confirm');
+  addToCart() {
+    return this.modalCtrl.dismiss(
+      {
+        pizza: this.pizza,
+        size: this.selectedSize,
+        quantity: this.quantity,
+        notes: this.notes,
+        totalPrice: this.totalPrice,
+      },
+      'confirm'
+    );
   }
 
-  changeQuantity(change: number){
-    if(this.quantity + change > 0){
+  changeQuantity(change: number) {
+    if (this.quantity + change > 0) {
       this.quantity += change;
       this.updatePrice();
     }
