@@ -46,7 +46,17 @@ export class Home {
     },
   ];
 
-  constructor(private modalCtrl: ModalController) {}
+  firstName: string = '';
+
+  ngOnInit() {
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+
+    if (loggedInUser && loggedInUser.name) {
+      this.firstName = loggedInUser.name.split(' ')[0];
+    }
+  }
+
+  constructor(private modalCtrl: ModalController) { }
 
   async openModal(pizza: any) {
     const modal = await this.modalCtrl.create({
