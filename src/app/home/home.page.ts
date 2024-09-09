@@ -46,7 +46,19 @@ export class Home {
     },
   ];
 
-  constructor(private modalCtrl: ModalController) {}
+  firstName: string = '';
+
+  ngOnInit() {
+    // Recupera o usuário logado do localStorage
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+
+    // Extrai o primeiro nome do usuário
+    if (loggedInUser && loggedInUser.name) {
+      this.firstName = loggedInUser.name.split(' ')[0]; // Pega o primeiro nome
+    }
+  }
+  
+  constructor(private modalCtrl: ModalController) { }
 
   async openModal(pizza: any) {
     const modal = await this.modalCtrl.create({
