@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ pizza.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-img [src]="pizza.imageUrl"></ion-img>
+  <ion-item>
+    <ion-label>Selecione o tamanho: </ion-label>
+    <ion-button (click)="selectSize('P')">P</ion-button>
+    <ion-button (click)="selectSize('M')">M</ion-button>
+    <ion-button (click)="selectSize('G')">G</ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Quantidade</ion-label>
+    <ion-buttons slot="end">
+      <ion-button (click)="changeQuantity(-1)">-</ion-button>
+      <ion-label>{{ quantity }}</ion-label>
+      <ion-button (click)="changeQuantity(1)">+</ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Observações</ion-label>
+    <ion-textarea
+      [(ngModel)]="notes"
+      placeholder="Ex: sem cebola"
+    ></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Preço Total</ion-label>
+    <ion-note>{{ totalPrice | currency : "BRL" }}</ion-note>
+  </ion-item>
+
+  <ion-footer>
+    <ion-button expand="block" (click)="addToCart()"
+      >Adicionar ao Carrinho</ion-button
+    >
+  </ion-footer>
+</ion-content>
