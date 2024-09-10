@@ -1,3 +1,14 @@
-img{
-    width: 300px;
+ion-card {
+    img {
+        width: 300px;
+    }
+
+    ion-card-title {
+        font-size: 15px;
+    }
+
+    ion-card-subtitle {
+        font-size: 15px;
+        color: #C2272D;
+    }
 }
