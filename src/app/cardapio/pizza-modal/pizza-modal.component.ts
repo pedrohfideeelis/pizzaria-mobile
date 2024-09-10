@@ -11,12 +11,15 @@ export class PizzaModalComponent {
   selectedSize: string = 'M';
   quantity: number = 1;
   notes: string = '';
-  price: number = 57.9;
+  price: number = 0;
   totalPrice: number = this.price;
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    if (this.pizza) {
+      this.price = this.pizza.price;
+    }
     this.updatePrice();
   }
 
@@ -28,19 +31,19 @@ export class PizzaModalComponent {
   updatePrice() {
     switch (this.selectedSize) {
       case 'P':
-        this.price = 37.9;
+        this.totalPrice = this.price * this.quantity;
         break;
       case 'M':
-        this.price = 57.9;
+        this.totalPrice = (this.price + 15) * this.quantity;
         break;
       case 'G':
-        this.price = 87.9;
+        this.totalPrice = (this.price + 20) * this.quantity;
         break;
       default:
-        this.price = 37.9;
+        this.totalPrice = this.price * this.quantity;
     }
-    this.totalPrice = this.price * this.quantity;
   }
+
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
