@@ -1,64 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { PizzaModalComponent } from '../cardapio/pizza-modal/pizza-modal.component';
+import { PizzaService } from '../services/pizza.service';
+import { Pizza } from '../services/pizza.model';
 
 @Component({
   selector: 'home-page',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class Home {
-  pizzas = [
-    {
-      name: 'Pizza de Sushi',
-      imageUrl: 'assets/images/PIZZA.jpg',
-      price: 29.99,
-      description:
-        'Massa de alga e arroz, molho shoyo, sushi de salmão, sashimi, brócolis e tomate',
-    },
-    {
-      name: 'Pizza de Sushi',
-      imageUrl: 'assets/images/PIZZA.jpg',
-      price: 29.99,
-      description:
-        'Massa de alga e arroz, molho shoyo, sushi de salmão, sashimi, brócolis e tomate',
-    },
-    {
-      name: 'Pizza de Sushi',
-      imageUrl: 'assets/images/PIZZA.jpg',
-      price: 29.99,
-      description:
-        'Massa de alga e arroz, molho shoyo, sushi de salmão, sashimi, brócolis e tomate',
-    },
-    {
-      name: 'Pizza de Sushi',
-      imageUrl: 'assets/images/PIZZA.jpg',
-      price: 29.99,
-      description:
-        'Massa de alga e arroz, molho shoyo, sushi de salmão, sashimi, brócolis e tomate',
-    },
-    {
-      name: 'Pizza de Sushi',
-      imageUrl: 'assets/images/PIZZA.jpg',
-      price: 29.99,
-      description:
-        'Massa de alga e arroz, molho shoyo, sushi de salmão, sashimi, brócolis e tomate',
-    },
-  ];
-
+export class Home implements OnInit {
+  pizzas: Pizza[] = [];
   firstName: string = '';
 
+  constructor(private modalCtrl: ModalController, private pizzaService: PizzaService) { }
+
   ngOnInit() {
-    // Recupera o usuário logado do localStorage
+    this.pizzas = this.pizzaService.getPizzas(); // Correção aqui
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
 
-    // Extrai o primeiro nome do usuário
     if (loggedInUser && loggedInUser.name) {
-      this.firstName = loggedInUser.name.split(' ')[0]; // Pega o primeiro nome
+      this.firstName = loggedInUser.name.split(' ')[0];
     }
   }
-  
-  constructor(private modalCtrl: ModalController) { }
 
   async openModal(pizza: any) {
     const modal = await this.modalCtrl.create({
@@ -68,3 +32,4 @@ export class Home {
     modal.present();
   }
 }
+
