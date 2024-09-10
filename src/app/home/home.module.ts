@@ -7,6 +7,7 @@ import { PizzaCardModule } from '../cardapio/pizza-card/pizza-card.module';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { CardapioPageModule } from '../cardapio/cardapio.module';
+import { PizzaService } from '../services/pizza.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { CardapioPageModule } from '../cardapio/cardapio.module';
     PizzaCardModule,
     CardapioPageModule
   ],
-  declarations: [Home]
+  declarations: [Home],
+  providers: [PizzaService]
 })
 export class HomePageModule {}

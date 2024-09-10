@@ -7,6 +7,7 @@ import {PizzaCardModule} from "./pizza-card/pizza-card.module"
 
 import { CardapioPageRoutingModule } from './cardapio-routing.module';
 import { PizzaModalComponent } from './pizza-modal/pizza-modal.component';
+import { PizzaService } from '../services/pizza.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { PizzaModalComponent } from './pizza-modal/pizza-modal.component';
     PizzaCardModule
   ],
   declarations: [Cardapio, PizzaModalComponent],
-  exports: [PizzaModalComponent]
+  exports: [PizzaModalComponent],
+  providers: [PizzaService]
 })
 export class CardapioPageModule {}
