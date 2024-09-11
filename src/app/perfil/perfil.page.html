@@ -19,19 +19,19 @@
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input [formControlName]="'email'" [readonly]="!editEmail" type="email"></ion-input>
-      <ion-icon name="pencil" slot="end" (click)="toggleEdit('email')"></ion-icon>
+      <ion-icon name="create" slot="end" (click)="toggleEdit('email')"></ion-icon>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Telefone</ion-label>
       <ion-input [formControlName]="'phone'" [readonly]="!editPhone" type="tel"></ion-input>
-      <ion-icon name="pencil" slot="end" (click)="toggleEdit('phone')"></ion-icon>
+      <ion-icon name="create" slot="end" (click)="toggleEdit('phone')"></ion-icon>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Endereço</ion-label>
       <ion-input [formControlName]="'address'" [readonly]="!editAddress"></ion-input>
-      <ion-icon name="pencil" slot="end" (click)="toggleEdit('address')"></ion-icon>
+      <ion-icon name="create" slot="end" (click)="toggleEdit('address')"></ion-icon>
     </ion-item>
 
     <ion-button expand="full" type="submit" [disabled]="!perfilForm.valid">Salvar</ion-button>
