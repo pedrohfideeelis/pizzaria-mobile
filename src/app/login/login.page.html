@@ -1,10 +1,6 @@
 <ion-content slot="fixed">
   <div class="login-container" slot="fixed">
     <div class="header" slot="fixed">
-      <ion-button fill="clear" class="back-button" (click)="navigateBackToWelcome()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-      <h1>Login</h1>
     </div>
 
     <img src="assets/images/PIZZA_LOGO_ICON.svg" alt="Logo Icon" class="logo" slot="fixed">
@@ -18,14 +14,17 @@
 
       <ion-item slot="fixed">
         <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-        <ion-input formControlName="password" type="password" placeholder="Senha" [clearInput]="true"
+        <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password' " placeholder="Senha"
           labelPlacement="stacked"></ion-input>
+        <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" slot="end"
+          (click)="togglePasswordVisibility()"></ion-icon>
       </ion-item>
+      <div class="forgot-password" (click)="navigateToForgotPassword()">Esqueci minha senha</div>
 
-      <ion-button class="login-button" expand="full" type="submit" [disabled]="!loginForm.valid" shape="round">Login</ion-button>
+      <ion-button class="login-button" expand="full" type="submit" [disabled]="!loginForm.valid"
+        shape="round">Login</ion-button>
     </form>
 
-    <div class="forgot-password" (click)="navigateToForgotPassword()">Esqueci minha senha</div>
 
     <div class="register" (click)="navigateToRegister()">Ainda não tenho cadastro</div>
   </div>

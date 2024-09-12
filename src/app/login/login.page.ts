@@ -9,6 +9,7 @@ import { NavController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   loginForm!: FormGroup;
+  showPassword = false;
 
   constructor(private formBuilder: FormBuilder, private navCtrl: NavController) { }
 
@@ -19,17 +20,21 @@ export class LoginPage implements OnInit {
     });
   }
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
   onSubmit() {
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value ?? '';
       const password = this.loginForm.get('password')?.value ?? '';
-  
+
       const storedData = localStorage.getItem('users');
       if (storedData) {
         const users = JSON.parse(storedData);
-  
+
         const user = users.find((u: any) => u.email === email && u.password === password);
-  
+
         if (user) {
           localStorage.setItem('loggedInUser', JSON.stringify(user));
           this.navCtrl.navigateRoot('/tabs');
@@ -48,9 +53,5 @@ export class LoginPage implements OnInit {
 
   navigateToRegister() {
     this.navCtrl.navigateForward('/register');
-  }
-
-  navigateBackToWelcome() {
-    this.navCtrl.navigateBack('/welcome');
   }
 }
