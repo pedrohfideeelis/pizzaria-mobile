@@ -24,17 +24,15 @@ export class LoginPage implements OnInit {
       const email = this.loginForm.get('email')?.value ?? '';
       const password = this.loginForm.get('password')?.value ?? '';
   
-      // Obtém os usuários cadastrados
       const storedData = localStorage.getItem('users');
       if (storedData) {
         const users = JSON.parse(storedData);
   
-        // Procura um usuário que corresponda ao email e senha fornecidos
         const user = users.find((u: any) => u.email === email && u.password === password);
   
         if (user) {
           localStorage.setItem('loggedInUser', JSON.stringify(user));
-          this.navCtrl.navigateRoot('/tabs'); // Redireciona para a página inicial após o login
+          this.navCtrl.navigateRoot('/tabs');
         } else {
           alert('Credenciais inválidas');
         }
@@ -44,17 +42,14 @@ export class LoginPage implements OnInit {
     }
   }
 
-  // Função para navegar para a página de "Esqueci minha senha"
   navigateToForgotPassword() {
     this.navCtrl.navigateForward('/forgot-password');
   }
 
-  // Função para navegar para a página de "Cadastro"
   navigateToRegister() {
     this.navCtrl.navigateForward('/register');
   }
 
-  // Função para voltar à página de "Welcome"
   navigateBackToWelcome() {
     this.navCtrl.navigateBack('/welcome');
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -6,14 +6,16 @@ import { NavController } from '@ionic/angular';
   templateUrl: './welcome.page.html',
   styleUrls: ['./welcome.page.scss'],
 })
-export class WelcomePage {
+export class WelcomePage implements OnInit {
+
+  showLoading = true;
+
   constructor(private navCtrl: NavController) { }
 
-  navigateToLogin() {
-    this.navCtrl.navigateForward('/login');
-  }
-
-  navigateToRegister() {
-    this.navCtrl.navigateForward('/register');
+  ngOnInit() {
+    setTimeout(() => {
+      this.showLoading = false;
+      this.navCtrl.navigateForward('/login');
+    }, 4000);
   }
 }
