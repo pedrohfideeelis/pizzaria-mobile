@@ -1,7 +1,7 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Perfil } from './perfil.page';
 
 import { PerfilPageRoutingModule } from './perfil-routing.module';
@@ -11,6 +11,7 @@ import { PerfilPageRoutingModule } from './perfil-routing.module';
     IonicModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     PerfilPageRoutingModule
   ],
   declarations: [Perfil]

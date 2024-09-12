@@ -1,15 +1,41 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Perfil
-    </ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content padding>
+  <form [formGroup]="perfilForm" (ngSubmit)="onSave()">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input [value]="user?.name" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">CPF</ion-label>
+      <ion-input [value]="user?.cpf" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [formControlName]="'email'" [readonly]="!editEmail" type="email"></ion-input>
+      <ion-icon name="create" slot="end" (click)="toggleEdit('email')"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input [formControlName]="'phone'" [readonly]="!editPhone" type="tel"></ion-input>
+      <ion-icon name="create" slot="end" (click)="toggleEdit('phone')"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Endereço</ion-label>
+      <ion-input [formControlName]="'address'" [readonly]="!editAddress"></ion-input>
+      <ion-icon name="create" slot="end" (click)="toggleEdit('address')"></ion-icon>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!perfilForm.valid">Salvar</ion-button>
+
+    <ion-button expand="full" color="medium">Alterar Senha</ion-button>
+  </form>
 </ion-content>
