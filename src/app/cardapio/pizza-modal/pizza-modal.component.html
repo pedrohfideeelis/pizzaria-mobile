@@ -29,10 +29,7 @@
 
   <ion-item>
     <ion-label position="stacked">Observações</ion-label>
-    <ion-textarea
-      [(ngModel)]="notes"
-      placeholder="Ex: sem cebola"
-    ></ion-textarea>
+    <ion-textarea [(ngModel)]="notes" placeholder="Ex: sem cebola"></ion-textarea>
   </ion-item>
 
   <ion-item>
@@ -41,8 +38,6 @@
   </ion-item>
 
   <ion-footer>
-    <ion-button expand="block" (click)="addToCart()"
-      >Adicionar ao Carrinho</ion-button
-    >
+    <ion-button expand="block" (click)="addToCart()">Adicionar ao Carrinho</ion-button>
   </ion-footer>
 </ion-content>

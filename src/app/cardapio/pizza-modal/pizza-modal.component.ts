@@ -50,16 +50,17 @@ export class PizzaModalComponent {
   }
 
   addToCart() {
-    return this.modalCtrl.dismiss(
-      {
-        pizza: this.pizza,
-        size: this.selectedSize,
-        quantity: this.quantity,
-        notes: this.notes,
-        totalPrice: this.totalPrice,
-      },
-      'confirm'
-    );
+    let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')!) : [];
+    cart.push({
+      pizza: this.pizza,
+      size: this.selectedSize,
+      quantity: this.quantity,
+      notes: this.notes,
+      totalPrice: this.totalPrice,
+    });
+    localStorage.setItem('cart', JSON.stringify(cart));
+  
+    return this.modalCtrl.dismiss('confirm');
   }
 
   changeQuantity(change: number) {

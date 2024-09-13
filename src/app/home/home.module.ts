@@ -8,6 +8,8 @@ import { PizzaCardModule } from '../cardapio/pizza-card/pizza-card.module';
 import { HomePageRoutingModule } from './home-routing.module';
 import { CardapioPageModule } from '../cardapio/cardapio.module';
 import { PizzaService } from '../services/pizza.service';
+import { CartComponent } from '../cart/cart.component';
+import { CartService } from '../services/cart.service';
 
 @NgModule({
   imports: [
@@ -16,9 +18,9 @@ import { PizzaService } from '../services/pizza.service';
     FormsModule,
     HomePageRoutingModule,
     PizzaCardModule,
-    CardapioPageModule
+    CardapioPageModule,
   ],
-  declarations: [Home],
-  providers: [PizzaService]
+  declarations: [Home, CartComponent],
+  providers: [PizzaService, CartService]
 })
 export class HomePageModule {}

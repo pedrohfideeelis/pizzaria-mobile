@@ -2,6 +2,13 @@
   <div class="welcome-container">
     <img src="../../assets/images/LOGO_NAME.svg" alt="Logo">
     <h1>Seja bem-vindo, {{ firstName }}!</h1>
+    <ion-buttons slot="end">
+      <ion-button (click)="openCart()" class="cart-button">
+        <ion-icon name="cart"></ion-icon>
+        <!-- Adicionamos uma classe para customizar o badge -->
+        <ion-badge *ngIf="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</ion-badge>
+      </ion-button>
+    </ion-buttons>
     <ion-searchbar placeholder="Buscar pizza..." animated="true"></ion-searchbar>
   </div>
 
