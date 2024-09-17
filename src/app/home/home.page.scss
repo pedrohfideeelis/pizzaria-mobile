@@ -1,39 +1,39 @@
 ion-content {
     --background: #f3f3f3 url('../../assets/images/PATTERN.svg');
 
-    .welcome-container {
+    .header-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        gap: 80px;
+
         img {
-            padding-top: 50px;
-            padding-left: 20px;
+            padding-top: 45px;
+            padding-left: 25px;
             height: 90px;
         }
 
-        ion-searchbar {
-            --background: #fff;
+        .cart-button {
+            --background: #C2272D;
+            color: white;
+            position: relative;
+            padding-top: 30px;
         }
     }
+}
 
+.welcome-container {
     h1 {
         padding: 10px 0 0 20px;
         font-size: 20px;
         color: #C2272D;
     }
 
-    .cart-button {
-        position: relative;
+    ion-searchbar {
+        padding-top: 10px;
+        --background: #fff;
     }
-
-    .cart-badge {
-        position: absolute;
-        top: -10px; // Ajuste conforme necessário
-        right: -10px; // Ajuste conforme necessário
-        background-color: red; // Cor da badge
-        color: white; // Cor do texto
-        font-size: 12px; // Tamanho da fonte da badge
-        border-radius: 50%; // Deixar o badge redondo
-        padding: 5px;
-    }
-
 }
 
 .promocoes {
