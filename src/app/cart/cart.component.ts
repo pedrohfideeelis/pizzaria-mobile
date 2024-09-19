@@ -11,49 +11,39 @@ export class CartComponent implements OnInit {
   cartItems: any[] = [];
   couponCode: string = '';
   totalPrice: number = 0;
+  cartItemCount: number = 0;
 
   constructor(private cartService: CartService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.loadCart();
-  }
-
-  loadCart() {
-    const cart = localStorage.getItem('cart');
-    if (cart) {
-      this.cartItems = JSON.parse(cart);
+    // Inscreve-se para receber atualizações dos itens do carrinho
+    this.cartService.cartItems$.subscribe(items => {
+      this.cartItems = items;
       this.calculateTotalPrice();
-    } else {
-      this.cartItems = [];
-    }
+    });
+
+    // Inscreve-se para atualizar a contagem de itens no carrinho
+    this.cartService.cartItemCount$.subscribe(count => {
+      this.cartItemCount = count;
+    });
   }
 
   increaseQuantity(item: any) {
-    item.quantity += 1;
-    item.totalPrice = item.quantity * item.pizza.price;
-    this.updateCartStorage();
-    this.calculateTotalPrice();
+    this.cartService.updateQuantity(item, item.quantity + 1);
   }
 
   decreaseQuantity(item: any) {
     if (item.quantity > 1) {
-      item.quantity -= 1;
-      item.totalPrice = item.quantity * item.pizza.price;
-      this.updateCartStorage();
-      this.calculateTotalPrice();
+      this.cartService.updateQuantity(item, item.quantity - 1);
     }
   }
 
   removeItem(index: number) {
-    this.cartItems.splice(index, 1);
-    this.updateCartStorage();
-    this.calculateTotalPrice();
+    this.cartService.removeFromCart(index);
   }
 
   calculateTotalPrice() {
-    this.totalPrice = this.cartItems.reduce((total, item) => {
-      return total + item.totalPrice;
-    }, 0);
+    this.totalPrice = this.cartService.calculateTotal();
   }
 
   applyCoupon() {
@@ -68,9 +58,5 @@ export class CartComponent implements OnInit {
 
   closeCart() {
     this.modalCtrl.dismiss();
-  }
-
-  updateCartStorage() {
-    localStorage.setItem('cart', JSON.stringify(this.cartItems));
   }
 }

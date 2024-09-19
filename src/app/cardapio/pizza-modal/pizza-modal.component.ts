@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-pizza-modal',
@@ -14,13 +15,13 @@ export class PizzaModalComponent {
   price: number = 0;
   totalPrice: number = this.price;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private cartService: CartService) { }
 
   ngOnInit() {
     if (this.pizza) {
       this.price = this.pizza.price;
+      this.updatePrice();
     }
-    this.updatePrice();
   }
 
   selectSize(size: string) {
@@ -44,22 +45,19 @@ export class PizzaModalComponent {
     }
   }
 
-
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
   addToCart() {
-    let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')!) : [];
-    cart.push({
+    const item = {
       pizza: this.pizza,
       size: this.selectedSize,
       quantity: this.quantity,
       notes: this.notes,
       totalPrice: this.totalPrice,
-    });
-    localStorage.setItem('cart', JSON.stringify(cart));
-  
+    };
+    this.cartService.addToCart(item);
     return this.modalCtrl.dismiss('confirm');
   }
 

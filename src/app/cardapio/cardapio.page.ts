@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { PizzaModalComponent } from './pizza-modal/pizza-modal.component';
-import { Pizza } from '../services/pizza.model';
+import { Pizza } from '../../models/pizza.model';
 import { PizzaService } from '../services/pizza.service';
 
 @Component({

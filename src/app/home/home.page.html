@@ -4,7 +4,7 @@
     <ion-buttons slot="end">
       <ion-button (click)="openCart()" class="cart-button">
         <ion-icon name="cart"></ion-icon>
-        <ion-badge *ngIf="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</ion-badge>
+        <ion-badge *ngIf="cartItemCount > 0" color="primary">{{ cartItemCount }}</ion-badge>
       </ion-button>
     </ion-buttons>
   </div>
