@@ -100,4 +100,12 @@ export class CartService {
     const count = items.reduce((acc, item) => acc + item.quantity, 0);
     this.cartItemCountSubject.next(count);
   }
+
+  clearCart() {
+    // Esvazia o array de itens do carrinho
+    const emptyCart: any[] = [];
+    this.cartItemsSubject.next(emptyCart);
+    this.saveCartItemsToStorage(emptyCart); // Atualiza o local storage
+    this.updateCartItemCount(); // Atualiza a contagem de itens do carrinho
+  }
 }

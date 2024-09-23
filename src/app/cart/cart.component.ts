@@ -59,4 +59,8 @@ export class CartComponent implements OnInit {
   closeCart() {
     this.modalCtrl.dismiss();
   }
+
+  clearCart() {
+    this.cartService.clearCart();
+  }
 }
