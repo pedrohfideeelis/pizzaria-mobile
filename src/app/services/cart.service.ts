@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Coupon } from 'src/models/coupon.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private cartKey = 'cartItems';
+  private usedCoupons: Set<string> = new Set();
+
+  private coupons: Coupon[] = [
+    { code: 'DESCONTO10', discountType: 'percent', discountValue: 10, isUsed: false },
+    { code: 'DESCONTO20', discountType: 'percent', discountValue: 20, isUsed: false },
+    { code: 'DESCONTO30', discountType: 'fixed', discountValue: 30, isUsed: false }
+  ];
 
   // BehaviorSubject para manter os itens do carrinho de forma reativa
   private cartItemsSubject = new BehaviorSubject<any[]>(this.loadCartItemsFromStorage());
@@ -17,6 +25,11 @@ export class CartService {
 
   constructor() {
     this.updateCartItemCount();
+
+    const storedCoupons = localStorage.getItem('coupons');
+    if (storedCoupons) {
+      this.coupons = JSON.parse(storedCoupons);
+    }
   }
 
   // Carrega os itens do carrinho do localStorage
@@ -107,5 +120,76 @@ export class CartService {
     this.cartItemsSubject.next(emptyCart);
     this.saveCartItemsToStorage(emptyCart); // Atualiza o local storage
     this.updateCartItemCount(); // Atualiza a contagem de itens do carrinho
+  }
+
+  applyCoupon(couponCode: string, totalPrice: number): number {
+    const coupon = this.coupons.find(c => c.code === couponCode);
+
+    if (!coupon) {
+      alert('Cupom inválido');
+      return totalPrice;
+    }
+
+    if (coupon.isUsed) {
+      alert('Este cupom já foi utilizado');
+      return totalPrice; // Retorna o preço original se o cupom já foi utilizado
+    }
+
+    // Aplicando o desconto
+    if (coupon.discountType === 'percent') {
+      totalPrice *= (1 - coupon.discountValue / 100);
+    } else if (coupon.discountType === 'fixed') {
+      totalPrice -= coupon.discountValue;
+    }
+
+    // Marcando o cupom como utilizado
+    coupon.isUsed = true;
+    this.saveCouponsToStorage(); // Salva a atualização no local storage
+
+    return totalPrice;
+  }
+
+  private saveCouponsToStorage() {
+    localStorage.setItem('coupons', JSON.stringify(this.coupons));
+  }
+
+  validateCoupon(couponCode: string): number | 'invalid' | 'used' {
+    const coupon = this.coupons.find(c => c.code === couponCode);
+
+    if (!coupon) {
+      return 'invalid'; // Retorna 'invalid' se o cupom não existir
+    }
+
+    if (this.usedCoupons.has(couponCode)) {
+      return 'used'; // Retorna 'used' se o cupom já foi utilizado
+    }
+
+    // Se o cupom for válido e não utilizado, calcula o desconto
+    let discountedPrice = this.calculateTotal();
+
+    // Aplicando o desconto
+    if (coupon.discountType === 'percent') {
+      discountedPrice *= (1 - coupon.discountValue / 100);
+    } else if (coupon.discountType === 'fixed') {
+      discountedPrice -= coupon.discountValue;
+    }
+
+    return discountedPrice; // Retorna o novo preço com desconto
+  }
+
+  markCouponAsUsed(couponCode: string) {
+    const coupon = this.coupons.find(c => c.code === couponCode);
+    if (coupon) {
+      coupon.isUsed = true; // Marca o cupom como utilizado
+      this.saveCouponsToStorage(); // Salva a atualização no local storage
+    }
+  }
+
+  resetCoupon(couponCode: string): void {
+    const coupon = this.coupons.find(c => c.code === couponCode);
+    if (coupon) {
+      coupon.isUsed = false; // Reseta o status do cupom para não utilizado
+      this.saveCouponsToStorage(); // Salva a atualização no local storage
+    }
   }
 }

@@ -41,13 +41,18 @@
 
   <ion-item>
     <ion-label>Total</ion-label>
-    <ion-note>{{ totalPrice | currency : 'BRL' }}</ion-note>
+    <ion-note [ngStyle]="{ 'color': totalPrice < originalPrice ? '#C2272D' : 'black' }">
+      <span *ngIf="totalPrice < originalPrice" style="text-decoration: line-through;">
+        {{ originalPrice | currency: 'BRL' }}
+      </span>
+      {{ totalPrice | currency: 'BRL' }}
+    </ion-note>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Cupom de Desconto</ion-label>
-    <ion-input [(ngModel)]="couponCode" placeholder="Digite seu cupom"></ion-input>
-    <ion-button (click)="applyCoupon()">Aplicar</ion-button>
+    <ion-input type="text" [(ngModel)]="couponCode" placeholder="Digite seu cupom"></ion-input>
+    <ion-button (click)="applyCoupon()" [disabled]="isCouponApplied">Aplicar</ion-button>
   </ion-item>
 
   <ion-button (click)="clearCart()" class="clear-cart-button">Limpar Carrinho</ion-button>
