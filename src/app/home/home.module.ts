@@ -20,7 +20,7 @@ import { CartService } from '../services/cart.service';
     PizzaCardModule,
     CardapioPageModule,
   ],
-  declarations: [Home, CartComponent],
-  providers: [PizzaService, CartService]
+  declarations: [Home /*CartComponent*/]
+  //providers: [PizzaService, CartService]
 })
 export class HomePageModule {}
