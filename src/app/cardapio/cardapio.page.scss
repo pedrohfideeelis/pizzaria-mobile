@@ -6,13 +6,13 @@ ion-content {
         flex-direction: row;
         align-items: center;
         align-content: center;
-        gap: 80px;
+        margin-top: 30px;
 
         .cart-button {
             --background: #C2272D;
             color: white;
             position: relative;
-            padding-top: 30px;
+            margin-left: 35px;
         }
     }
 }
