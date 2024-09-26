@@ -7,21 +7,77 @@ ion-content {
         align-items: center;
         align-content: center;
         gap: 80px;
+        overflow: visible;
 
         img {
             padding-top: 45px;
             padding-left: 25px;
             height: 90px;
         }
-
-        .cart-button {
-            --background: #C2272D;
-            color: white;
-            position: relative;
-            padding-top: 30px;
-        }
     }
+
+    .cart-container {
+        position: relative;
+        /* Controla a posição da badge */
+        width: 50px;
+        /* Largura para o contêiner */
+        height: 50px;
+        /* Altura para o contêiner */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+        /* Permite que a badge seja exibida fora do contêiner */
+    }
+
+    .cart-button {
+        --background: #F8931F;
+        color: #C2272D;
+        width: 50px;
+        /* Tamanho ajustado */
+        height: 50px;
+        /* Tamanho ajustado */
+        padding: 0;
+        /* Remove padding adicional */
+        border-radius: 50%;
+        /* Botão circular */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cart-badge {
+        --background: #731216;
+        /* Cor de fundo */
+        --color: #ffffff;
+        /* Cor do texto */
+        position: absolute;
+        /* Badge com posição absoluta no contêiner */
+        top: -5px;
+        /* Ajuste vertical */
+        right: -5px;
+        /* Ajuste horizontal */
+        margin: 0;
+        /* Remover margens adicionais */
+        min-width: 20px;
+        /* Largura mínima */
+        min-height: 20px;
+        /* Altura mínima */
+        padding: 2px 6px;
+        /* Espessura interna */
+        font-size: 12px;
+        /* Tamanho da fonte */
+        border-radius: 50%;
+        /* Badge circular */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        /* Garante que a badge esteja na frente do botão */
+    }
+
 }
+
 
 .welcome-container {
     h1 {
@@ -32,7 +88,11 @@ ion-content {
 
     ion-searchbar {
         padding-top: 10px;
-        --background: #fff;
+        --background: #dddd;
+        --color: #C2272D;
+        --placeholder-color: #C2272D;
+        --icon-color: #C2272D;
+        border-radius: 100px;
     }
 }
 

@@ -2,10 +2,12 @@
   <div class="header-container">
     <img src="../../assets/images/LOGO_NAME.svg" alt="Logo">
     <ion-buttons slot="end">
-      <ion-button (click)="openCart()" class="cart-button">
-        <ion-icon name="cart"></ion-icon>
-        <ion-badge *ngIf="cartItemCount > 0" color="primary">{{ cartItemCount }}</ion-badge>
-      </ion-button>
+      <div class="cart-container">
+        <ion-button (click)="openCart()" class="cart-button">
+          <ion-icon name="cart"></ion-icon>
+        </ion-button>
+        <ion-badge *ngIf="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</ion-badge>
+      </div>
     </ion-buttons>
   </div>
 
