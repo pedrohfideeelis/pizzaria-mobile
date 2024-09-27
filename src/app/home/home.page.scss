@@ -18,29 +18,22 @@ ion-content {
 
     .cart-container {
         position: relative;
-        /* Controla a posição da badge */
         width: 50px;
-        /* Largura para o contêiner */
         height: 50px;
-        /* Altura para o contêiner */
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: visible;
-        /* Permite que a badge seja exibida fora do contêiner */
+        margin-top: 30  px;
     }
 
     .cart-button {
         --background: #F8931F;
         color: #C2272D;
-        width: 50px;
-        /* Tamanho ajustado */
-        height: 50px;
-        /* Tamanho ajustado */
+        width: 30px;
+        height: 30px;
         padding: 0;
-        /* Remove padding adicional */
         border-radius: 50%;
-        /* Botão circular */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -48,32 +41,20 @@ ion-content {
 
     .cart-badge {
         --background: #731216;
-        /* Cor de fundo */
         --color: #ffffff;
-        /* Cor do texto */
         position: absolute;
-        /* Badge com posição absoluta no contêiner */
-        top: -5px;
-        /* Ajuste vertical */
-        right: -5px;
-        /* Ajuste horizontal */
+        top: -1px;
+        right: -1px;
         margin: 0;
-        /* Remover margens adicionais */
         min-width: 20px;
-        /* Largura mínima */
         min-height: 20px;
-        /* Altura mínima */
         padding: 2px 6px;
-        /* Espessura interna */
         font-size: 12px;
-        /* Tamanho da fonte */
         border-radius: 50%;
-        /* Badge circular */
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 2;
-        /* Garante que a badge esteja na frente do botão */
     }
 
 }
