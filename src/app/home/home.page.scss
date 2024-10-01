@@ -109,13 +109,30 @@ ion-content {
 
 .cardapio {
     h2 {
+        margin: 0;
+        padding: 0;
         padding-top: 10px;
         text-align: center;
     }
 
-    .cardapio-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0px;
+    .cardapio-scroll {
+        padding-bottom: 0;
+        padding-top: 0;
+        display: flex;
+        overflow-x: auto; // Permitir rolagem horizontal
+        scroll-behavior: smooth; // Rolagem suave
+        -webkit-overflow-scrolling: touch; // Rolagem suave para dispositivos móveis
+    }
+
+    .pizza-card-container {
+        display: flex;
+        gap: 15px; // Espaçamento entre os cards
+    }
+
+    .pizza-card {
+        min-width: 150px; // Defina a largura mínima dos cards
+        flex-shrink: 0; // Impede que os cards sejam reduzidos
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
     }
 }

@@ -26,10 +26,12 @@
 
   <div class="cardapio">
     <h2>Cardápio</h2>
-    <div class="cardapio-grid">
-      <div *ngFor="let pizza of pizzas" (click)="openModal(pizza)">
-        <app-pizza-card [name]="pizza.name" [imageUrl]="pizza.imageUrl" [price]="pizza.price"
-          [showDescription]="false"></app-pizza-card>
+    <div class="cardapio-scroll">
+      <div class="pizza-card-container">
+        <div *ngFor="let pizza of pizzas" class="pizza-card" (click)="openModal(pizza)">
+          <app-pizza-card [name]="pizza.name" [imageUrl]="pizza.imageUrl" [price]="pizza.price"
+            [showDescription]="false"></app-pizza-card>
+        </div>
       </div>
     </div>
   </div>
