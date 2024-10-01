@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { PizzaModalComponent } from '../cardapio/pizza-modal/pizza-modal.component';
 import { PizzaService } from '../services/pizza.service';
@@ -15,6 +15,7 @@ export class Home implements OnInit {
   pizzas: Pizza[] = [];
   firstName: string = '';
   cartItemCount: number = 0;
+  slideIndex: number = 0;
 
   constructor(private modalCtrl: ModalController, private pizzaService: PizzaService, private cartService: CartService) { }
 
@@ -25,6 +26,24 @@ export class Home implements OnInit {
     if (loggedInUser && loggedInUser.name) {
       this.firstName = loggedInUser.name.split(' ')[0];
     }
+  }
+
+  ngAfterViewInit() {
+    this.startSlider();
+  }
+
+  startSlider() {
+    setInterval(() => {
+      this.slideIndex++;
+      const slides = document.querySelector('.slides') as HTMLElement;
+      const totalSlides = slides.childElementCount;
+
+      if (this.slideIndex >= totalSlides) {
+        this.slideIndex = 0;
+      }
+
+      slides.style.transform = `translateX(-${this.slideIndex * 100}%)`;
+    }, 3000);
   }
 
   async openModal(pizza: any) {

@@ -1,12 +1,13 @@
 <ion-content [fullscreen]="true">
-
   <div class="header-container">
+    <h2 size="large">Cardápio</h2>
     <ion-buttons slot="end">
-      <ion-title size="large">Cardápio</ion-title>
-      <ion-button (click)="openCart()" class="cart-button">
-        <ion-icon name="cart"></ion-icon>
-        <ion-badge *ngIf="cartItemCount > 0" color="primary">{{ cartItemCount }}</ion-badge>
-      </ion-button>
+      <div class="cart-container">
+        <ion-button (click)="openCart()" class="cart-button">
+          <ion-icon name="cart"></ion-icon>
+        </ion-button>
+        <ion-badge *ngIf="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</ion-badge>
+      </div>
     </ion-buttons>
   </div>
 
