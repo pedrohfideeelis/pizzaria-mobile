@@ -74,4 +74,8 @@ export class PizzaService {
     getPizzas() {
         return this.pizzas;
     }
+
+    getPizzasByIds(ids: number[]): Pizza[] {
+        return this.pizzas.filter(pizza => ids.includes(pizza.id));
+      }
 }

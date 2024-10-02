@@ -13,14 +13,22 @@ import { CartComponent } from '../cart/cart.component';
 })
 export class Home implements OnInit {
   pizzas: Pizza[] = [];
+  preferidas: Pizza[] = [];
+  sushiPizzas: Pizza[] = [];
   firstName: string = '';
   cartItemCount: number = 0;
   slideIndex: number = 0;
+
+  private preferidasID: number[] = [1, 4, 5, 6];
+  private sushiID: number[] = [1, 4, 6];
 
   constructor(private modalCtrl: ModalController, private pizzaService: PizzaService, private cartService: CartService) { }
 
   ngOnInit() {
     this.updateCartCount();
+    this.preferidas = this.pizzaService.getPizzasByIds(this.preferidasID);
+    this.sushiPizzas = this.pizzaService.getPizzasByIds(this.sushiID);
+
     this.pizzas = this.pizzaService.getPizzas();
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
     if (loggedInUser && loggedInUser.name) {
