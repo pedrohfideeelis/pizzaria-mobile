@@ -15,8 +15,8 @@
     <img [src]="imageUrl" alt="{{ name }}" class="pizza-image" />
   </div>
   <ion-card-header>
-    <ion-card-title class="pizza-title">{{ name }}</ion-card-title>
     <ion-card-subtitle class="pizza-price">A partir de {{ price | currency: 'BRL' }}</ion-card-subtitle>
+    <ion-card-title class="pizza-title">{{ name }}</ion-card-title>
   </ion-card-header>
   <ion-card-content *ngIf="showDescription">
     {{ description }}
