@@ -76,6 +76,6 @@ export class PizzaService {
     }
 
     getPizzasByIds(ids: number[]): Pizza[] {
-        return this.pizzas.filter(pizza => ids.includes(pizza.id));
-      }
+        return ids.map(id => this.pizzas.find(pizza => pizza.id === id)!).filter(pizza => pizza !== undefined);
+    }
 }

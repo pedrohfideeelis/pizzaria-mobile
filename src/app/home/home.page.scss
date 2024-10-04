@@ -107,7 +107,7 @@ ion-content {
     }
 }
 
-.preferidas {
+.pizza-card-div {
     .infos {
         display: flex;
         flex-direction: row;
@@ -131,7 +131,7 @@ ion-content {
         }
     }
 
-    .preferidas-scroll {
+    .card-scroll {
         padding-bottom: 0;
         padding-top: 0;
         display: flex;
@@ -142,59 +142,59 @@ ion-content {
 
     .pizza-card-container {
         display: flex;
-        gap: 15px; // Espaçamento entre os cards
+        gap: 15px;
     }
 
     .pizza-card {
-        min-width: 150px; // Defina a largura mínima dos cards
-        flex-shrink: 0; // Impede que os cards sejam reduzidos
+        min-width: 150px;
+        flex-shrink: 0;
         cursor: pointer;
         transition: transform 0.3s ease-in-out;
     }
 }
 
-.sushi-pizzas {
-    .infos-sushi {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        gap: 130px;
-        padding-top: 5px;
+.infos-sushi {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 130px;
+    padding-top: 5px;
 
-        h3 {
-            margin: 0;
-            padding: 0;
-            color: #C2272D;
-            font-size: 18px;
-        }
-
-        a {
-            color: #C2272D;
-            font-size: 15px;
-            padding: 5px;
-        }
+    h3 {
+        margin: 0;
+        padding: 0;
+        color: #C2272D;
+        font-size: 18px;
     }
 
-    .sushi-scroll {
-        padding-bottom: 0;
-        padding-top: 0;
-        display: flex;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
+    a {
+        color: #C2272D;
+        font-size: 15px;
+        padding: 5px;
+    }
+}
+
+.infos-populares {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 130px;
+    padding-top: 5px;
+
+    h3 {
+        margin: 0;
+        padding: 0;
+        color: #C2272D;
+        font-size: 18px;
     }
 
-    .pizza-card-container-sushi {
-        display: flex;
-        gap: 15px; // Espaçamento entre os cards
-    }
-
-    .pizza-card-sushi {
-        min-width: 150px; // Defina a largura mínima dos cards
-        flex-shrink: 0; // Impede que os cards sejam reduzidos
-        cursor: pointer;
-        transition: transform 0.3s ease-in-out;
+    a {
+        color: #C2272D;
+        font-size: 15px;
+        padding: 5px;
     }
 }

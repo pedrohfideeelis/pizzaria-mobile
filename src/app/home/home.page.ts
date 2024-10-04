@@ -15,12 +15,14 @@ export class Home implements OnInit {
   pizzas: Pizza[] = [];
   preferidas: Pizza[] = [];
   sushiPizzas: Pizza[] = [];
+  popularesPizzas: Pizza[] = [];
   firstName: string = '';
   cartItemCount: number = 0;
   slideIndex: number = 0;
 
   private preferidasID: number[] = [6, 5, 8, 1];
   private sushiID: number[] = [1, 4, 6];
+  private popularesID: number[] = [8, 7, 5, 2];
 
   constructor(private modalCtrl: ModalController, private pizzaService: PizzaService, private cartService: CartService) { }
 
@@ -28,6 +30,7 @@ export class Home implements OnInit {
     this.updateCartCount();
     this.preferidas = this.pizzaService.getPizzasByIds(this.preferidasID);
     this.sushiPizzas = this.pizzaService.getPizzasByIds(this.sushiID);
+    this.popularesPizzas = this.pizzaService.getPizzasByIds(this.popularesID);
 
     this.pizzas = this.pizzaService.getPizzas();
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
