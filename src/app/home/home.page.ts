@@ -19,7 +19,7 @@ export class Home implements OnInit {
   cartItemCount: number = 0;
   slideIndex: number = 0;
 
-  private preferidasID: number[] = [1, 4, 5, 6];
+  private preferidasID: number[] = [6, 5, 8, 1];
   private sushiID: number[] = [1, 4, 6];
 
   constructor(private modalCtrl: ModalController, private pizzaService: PizzaService, private cartService: CartService) { }
