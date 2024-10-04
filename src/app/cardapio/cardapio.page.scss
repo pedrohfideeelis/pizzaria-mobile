@@ -6,11 +6,12 @@ ion-content {
         flex-direction: row;
         align-items: center;
         align-content: center;
-        gap: 160px;
+        gap: 70px;
 
-        h2 {
-            padding: 10px 0 0 20px;
-            font-size: 30px;
+        img {
+            padding-top: 35px;
+            padding-left: 25px;
+            height: 80px;
         }
     }
 
@@ -22,7 +23,7 @@ ion-content {
         align-items: center;
         justify-content: center;
         overflow: visible;
-        margin-top: 10px;
+        margin-top: 15px;
     }
 
     .cart-button {

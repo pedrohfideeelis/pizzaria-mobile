@@ -23,12 +23,12 @@
     </div>
   </div>
 
-  <div class="preferidas">
+  <div class="pizza-card-div">
     <div class="infos">
       <h3>As preferidas da vovó</h3>
       <a href="/tabs/cardapio">Ver mais</a>
     </div>
-    <div class="preferidas-scroll">
+    <div class="card-scroll">
       <div class="pizza-card-container">
         <div *ngFor="let pizza of preferidas" class="pizza-card" (click)="openModal(pizza)">
           <app-pizza-card [name]="pizza.name" [imageUrl]="pizza.imageUrl" [price]="pizza.price"
@@ -38,14 +38,29 @@
     </div>
   </div>
 
-  <div class="sushi-pizzas">
+  <div class="pizza-card-div">
     <div class="infos-sushi">
       <h3>Pizzas de Sushi</h3>
       <a href="/tabs/cardapio">Ver mais</a>
     </div>
-    <div class="sushi-scroll">
-      <div class="pizza-card-container-sushi">
-        <div *ngFor="let pizza of sushiPizzas" class="pizza-card-sushi" (click)="openModal(pizza)">
+    <div class="card-scroll">
+      <div class="pizza-card-container">
+        <div *ngFor="let pizza of sushiPizzas" class="pizza-card" (click)="openModal(pizza)">
+          <app-pizza-card [name]="pizza.name" [imageUrl]="pizza.imageUrl" [price]="pizza.price"
+            [showDescription]="false"></app-pizza-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pizza-card-div">
+    <div class="infos-populares">
+      <h3>As mais pedidas</h3>
+      <a href="/tabs/cardapio">Ver mais</a>
+    </div>
+    <div class="card-scroll">
+      <div class="pizza-card-container">
+        <div *ngFor="let pizza of popularesPizzas" class="pizza-card" (click)="openModal(pizza)">
           <app-pizza-card [name]="pizza.name" [imageUrl]="pizza.imageUrl" [price]="pizza.price"
             [showDescription]="false"></app-pizza-card>
         </div>
