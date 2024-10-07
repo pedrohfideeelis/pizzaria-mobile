@@ -1,0 +1,77 @@
+ion-content {
+    --background: #FFFFFF;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.perfil-form {
+    margin: 15px;
+}
+
+.input-container {
+    --background: #DDDDDD;
+    --border-radius: 20px;
+    --min-height: 50px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+
+    ion-icon {
+        margin-right: 10px;
+    }
+
+    ion-input {
+        flex: 1;
+        border-radius: 30px;
+        background: #DDDDDD;
+        font-size: 16px;
+    }
+}
+
+.button-container,
+.button-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 7px;
+
+    .edit-button,
+    .logout-button,
+    .confirm-button,
+    .cancel-button {
+        width: 80%;
+        height: 50px;
+    }
+
+    .edit-button,
+    .confirm-button {
+        --background: #C2272D;
+        --color: #FFFFFF;
+        font-weight: 500;
+    }
+
+    .logout-button,
+    .cancel-button {
+        --background: #F8931F;
+        --color: #C2272D;
+        font-weight: 600;
+    }
+}
+
+.title-container {
+    text-align: center;
+    margin-top: 20px;
+    color: #C2272D;
+
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+    }
+}

@@ -1,41 +1,42 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding [fullscreen]="true">
+  <div class="title-container">
+    <h3>Perfil</h3>
+  </div>
 
-<ion-content padding>
-  <form [formGroup]="perfilForm" (ngSubmit)="onSave()">
-    <ion-item>
-      <ion-label position="floating">Nome</ion-label>
+  <form [formGroup]="perfilForm" class="perfil-form">
+    <ion-item class="input-container">
+      <ion-icon name="person-outline" slot="start" color="danger"></ion-icon>
       <ion-input [value]="user?.name" readonly></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">CPF</ion-label>
+    <ion-item class="input-container">
+      <ion-icon name="card-outline" slot="start" color="danger"></ion-icon>
       <ion-input [value]="user?.cpf" readonly></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input [formControlName]="'email'" [readonly]="!editEmail" type="email"></ion-input>
-      <ion-icon name="create" slot="end" (click)="toggleEdit('email')"></ion-icon>
+    <ion-item class="input-container">
+      <ion-icon name="mail-outline" slot="start" color="danger"></ion-icon>
+      <ion-input [formControlName]="'email'" type="text"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Telefone</ion-label>
-      <ion-input [formControlName]="'phone'" [readonly]="!editPhone" type="tel"></ion-input>
-      <ion-icon name="create" slot="end" (click)="toggleEdit('phone')"></ion-icon>
+    <ion-item class="input-container">
+      <ion-icon name="call-outline" slot="start" color="danger"></ion-icon>
+      <ion-input [formControlName]="'phone'" type="text"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Endereço</ion-label>
-      <ion-input [formControlName]="'address'" [readonly]="!editAddress"></ion-input>
-      <ion-icon name="create" slot="end" (click)="toggleEdit('address')"></ion-icon>
+    <ion-item class="input-container">
+      <ion-icon name="home-outline" slot="start" color="danger"></ion-icon>
+      <ion-input [formControlName]="'address'" type="text"></ion-input>
     </ion-item>
 
-    <ion-button expand="full" type="submit" [disabled]="!perfilForm.valid">Salvar</ion-button>
+    <div class="button-container">
+      <ion-button class="edit-button" *ngIf="!editMode" (click)="toggleEdit()" shape="round">Editar</ion-button>
+      <ion-button class="logout-button" *ngIf="!editMode" shape="round" (click)="onLogout()">Sair</ion-button>
+    </div>
 
-    <ion-button expand="full" color="medium">Alterar Senha</ion-button>
+    <div *ngIf="editMode" class="button-edit">
+      <ion-button class="confirm-button" expand="full" (click)="onSave()" shape="round">Confirmar</ion-button>
+      <ion-button class="cancel-button" expand="full" (click)="onCancelEdit()" shape="round">Cancelar</ion-button>
+    </div>
   </form>
 </ion-content>

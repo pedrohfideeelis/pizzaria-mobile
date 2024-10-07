@@ -10,24 +10,21 @@ import { NavController } from '@ionic/angular';
 export class Perfil implements OnInit {
   perfilForm!: FormGroup;
   user: any;
-  editEmail = false;
-  editPhone = false;
-  editAddress = false;
+  editMode = false;
 
-  constructor(private formBuilder: FormBuilder, private cdr: ChangeDetectorRef) { }
+  constructor(private formBuilder: FormBuilder, private cdr: ChangeDetectorRef, private navController: NavController) { }
 
   ngOnInit() {
     this.perfilForm = this.formBuilder.group({
-      email: [''],
-      phone: [''],
-      address: ['']
+      email: [{ value: '', disabled: true }],
+      phone: [{ value: '', disabled: true }],
+      address: [{ value: '', disabled: true }]
     });
 
     const loggedInUser = localStorage.getItem('loggedInUser');
 
     if (loggedInUser) {
       this.user = JSON.parse(loggedInUser);
-
       console.log('Usuário Logado:', this.user);
 
       this.perfilForm.patchValue({
@@ -44,36 +41,61 @@ export class Perfil implements OnInit {
 
   onSave() {
     const updatedUser = this.perfilForm.value;
-    const storedUsers = localStorage.getItem('users'); // Obtemos o array de usuários
+    const storedUsers = localStorage.getItem('users');
     const loggedInUser = localStorage.getItem('loggedInUser');
 
     if (storedUsers && loggedInUser) {
       const users = JSON.parse(storedUsers);
-      const userIndex = users.findIndex((user: any) => user.email === this.user.email); // Encontre o índice do usuário
+      const userIndex = users.findIndex((user: any) => user.email === this.user.email);
 
       if (userIndex !== -1) {
-        // Atualize o usuário no array de usuários
         users[userIndex] = { ...users[userIndex], ...updatedUser };
         localStorage.setItem('users', JSON.stringify(users));
 
-        // Atualize o usuário logado
         const updatedLoggedInUser = { ...this.user, ...updatedUser };
         localStorage.setItem('loggedInUser', JSON.stringify(updatedLoggedInUser));
+
+        this.editMode = false;
+        this.disableFields();
       }
     }
   }
 
-  toggleEdit(field: string) {
-    switch (field) {
-      case 'email':
-        this.editEmail = !this.editEmail;
-        break;
-      case 'phone':
-        this.editPhone = !this.editPhone;
-        break;
-      case 'address':
-        this.editAddress = !this.editAddress;
-        break;
+  enableFields() {
+    this.perfilForm.controls['email'].enable();
+    this.perfilForm.controls['phone'].enable();
+    this.perfilForm.controls['address'].enable();
+  }
+
+  disableFields() {
+    this.perfilForm.controls['email'].disable();
+    this.perfilForm.controls['phone'].disable();
+    this.perfilForm.controls['address'].disable();
+  }
+
+  toggleEdit() {
+    this.editMode = !this.editMode;
+
+    if (this.editMode) {
+      this.enableFields();
+    } else {
+      this.disableFields();
     }
+  }
+
+  onCancelEdit() {
+    this.perfilForm.patchValue({
+      email: this.user.email,
+      phone: this.user.phone,
+      address: this.user.address
+    });
+
+    this.disableFields();
+    this.editMode = false;
+  }
+
+  onLogout() {
+    localStorage.removeItem('loggedInUser');
+    this.navController.navigateRoot('/login');
   }
 }
