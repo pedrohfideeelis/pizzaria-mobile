@@ -12,7 +12,17 @@
   </div>
 
   <div class="pizza-card" *ngFor="let pizza of pizzas" (click)="openModal(pizza)">
-    <app-pizza-card [name]="pizza.name" [imageUrl]="pizza.imageUrl" [price]="pizza.price"
-      [description]="pizza.description" [showDescription]="true"></app-pizza-card>
+    <!-- Div para a Imagem -->
+    <div class="pizza-image-container">
+      <img [src]="pizza.imageUrl" alt="Pizza Image" class="pizza-image">
+    </div>
+
+    <!-- Div para as Informações da Pizza -->
+    <div class="pizza-info-container">
+      <div class="pizza-name">{{ pizza.name }}</div>
+      <div class="pizza-description">{{ pizza.description }}</div>
+      <div class="pizza-price">A partir de</div>
+      <div class="price">R${{ pizza.price }}</div>
+    </div>
   </div>
 </ion-content>

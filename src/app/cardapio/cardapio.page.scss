@@ -55,4 +55,76 @@ ion-content {
         justify-content: center;
         z-index: 2;
     }
+
+    .pizza-card {
+        display: flex;
+        /* Define o layout flex para o container */
+        background-color: #E5E5E5;
+        /* Cor de fundo do card */
+        border-radius: 10px;
+        /* Borda arredondada */
+        padding: 20px;
+        /* Espaçamento interno */
+        margin: 15px 15px 15px 15px;
+        /* Espaçamento externo */
+        width: 350px;
+        /* Ocupa toda a largura */
+        align-items: center;
+        /* Alinha verticalmente o conteúdo */
+
+        .pizza-image-container {
+            flex: 0 0 100px;
+            /* Define a largura fixa para a imagem */
+            height: 100px;
+            border-radius: 50%;
+            /* Torna o contêiner da imagem circular */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            /* Espaçamento entre a imagem e o texto */
+
+            .pizza-image {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                /* Garante que a imagem se ajuste corretamente */
+            }
+        }
+
+        .pizza-info-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .pizza-name {
+                font-size: 18px;
+                font-weight: bold;
+                color: #E02020;
+                /* Cor vermelha para o nome */
+                margin-bottom: 10px;
+            }
+
+            .pizza-description {
+                font-size: 14px;
+                color: #444444;
+                line-height: 1.5;
+                margin-bottom: 10px;
+            }
+
+            .pizza-price {
+                font-size: 14px;
+                color: #444444;
+                margin-bottom: 3px;
+            }
+
+            .price {
+                font-size: 20px;
+                color: #E02020;
+                font-weight: bold;
+            }
+        }
+    }
+
 }
