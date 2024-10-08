@@ -1,3 +1,80 @@
+// ion-content {
+//     --background: #FFFFFF;
+//     padding-bottom: 0px;
+//     margin-bottom: 0px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 100%;
+// }
+
+// .perfil-form {
+//     margin: 15px;
+// }
+
+// .input-container {
+//     --background: #DDDDDD;
+//     --border-radius: 20px;
+//     --min-height: 50px;
+//     margin: 10px 0;
+//     display: flex;
+//     align-items: center;
+//     border-radius: 20px;
+
+//     ion-icon {
+//         margin-right: 10px;
+//     }
+
+//     ion-input {
+//         flex: 1;
+//         border-radius: 30px;
+//         font-size: 16px;
+//     }
+// }
+
+// .button-container,
+// .button-edit {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     width: 100%;
+//     gap: 7px;
+
+//     .edit-button,
+//     .logout-button,
+//     .confirm-button,
+//     .cancel-button {
+//         width: 80%;
+//         height: 50px;
+//     }
+
+//     .edit-button,
+//     .confirm-button {
+//         --background: #C2272D;
+//         --color: #FFFFFF;
+//         font-weight: 500;
+//     }
+
+//     .logout-button,
+//     .cancel-button {
+//         --background: #F8931F;
+//         --color: #C2272D;
+//         font-weight: 600;
+//     }
+// }
+
+// .title-container {
+//     text-align: center;
+//     margin-top: 20px;
+//     color: #C2272D;
+
+//     h1 {
+//         font-size: 24px;
+//         font-weight: bold;
+//     }
+// }
+
 ion-content {
     --background: #FFFFFF;
     padding-bottom: 0px;
@@ -73,4 +150,65 @@ ion-content {
         font-size: 24px;
         font-weight: bold;
     }
+}
+
+/* Estilos para o ion-card de informações adicionais */
+.card-container {
+    margin: 20px;
+    width: 90%;
+    max-width: 500px;
+    --background: #F7F7F7;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #C2272D;
+    margin-bottom: 10px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    gap: 10px;
+}
+
+.card-content h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+    margin: 0;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #555555;
+}
+
+/* Botões de ação adicionais dentro do card */
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.card-buttons ion-button {
+    flex: 1;
+    margin: 5px;
+    height: 45px;
+}
+
+.card-buttons .delete-button {
+    --background: #FF4C4C;
+    --color: #FFFFFF;
+}
+
+.card-buttons .save-button {
+    --background: #4CAF50;
+    --color: #FFFFFF;
 }
