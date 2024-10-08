@@ -1,0 +1,30 @@
+ion-img {
+    align-items: center;
+    justify-content: center;
+}
+
+.pizza-description {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.size-buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin: auto;
+}
+
+.quantity-buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin: auto;
+}
