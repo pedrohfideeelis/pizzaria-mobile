@@ -1,111 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Cadastro</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Nome</ion-label>
-      <ion-input formControlName="name"></ion-input>
-      <ion-note
-        *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)"
-        color="danger"
-      >
-        Nome é obrigatório.
-      </ion-note>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">CPF</ion-label>
-      <ion-input
-        formControlName="cpf"
-        type="text"
-        maxlength="14"
-        (ionInput)="formatCPF($event)"
-      >
-      </ion-input>
-      <ion-note
-        *ngIf="registerForm.get('cpf')?.invalid && (registerForm.get('cpf')?.touched || registerForm.get('cpf')?.dirty)"
-        color="danger"
-      >
-        CPF inválido. Por favor, insira um CPF válido.
-      </ion-note>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Telefone</ion-label>
-      <ion-input
-        formControlName="phone"
-        type="tel"
-        (ionInput)="formatPhone($event)"
-      >
-      </ion-input>
-      <ion-note
-        *ngIf="registerForm.get('phone')?.invalid && (registerForm.get('phone')?.touched || registerForm.get('phone')?.dirty)"
-        color="danger"
-      >
-        Telefone inválido. Por favor, insira um telefone válido.
-      </ion-note>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input formControlName="email" type="email"></ion-input>
-      <ion-note
-        *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)"
-        color="danger"
-      >
-        Email inválido. Por favor, insira um email válido.
-      </ion-note>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Endereço</ion-label>
-      <ion-input formControlName="address"></ion-input>
-      <ion-note
-        *ngIf="registerForm.get('address')?.invalid && (registerForm.get('address')?.touched || registerForm.get('address')?.dirty)"
-        color="danger"
-      >
-        Endereço é obrigatório.
-      </ion-note>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Senha</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
-      <ion-note
-        *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)"
-        color="danger"
-      >
-        Senha é obrigatória.
-      </ion-note>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Confirmar Senha</ion-label>
-      <ion-input formControlName="confirmPassword" type="password"></ion-input>
-      <ion-note
-        *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty)"
-        color="danger"
-      >
-        Confirmação de senha é obrigatória.
-      </ion-note>
-      <ion-note
-        *ngIf="registerForm.hasError('mustMatch') && (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty)"
-        color="danger"
-      >
-        As senhas não coincidem.
-      </ion-note>
-    </ion-item>
-
-    <ion-button expand="full" type="submit" [disabled]="!registerForm.valid"
-      >Registrar</ion-button
-    >
-  </form>
-</ion-content> -->
-
 <ion-content>
   <div class="header-container">
     <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
@@ -115,27 +7,28 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="perfil-form">
     <div class="input-container">
       <ion-icon name="person-outline"></ion-icon>
-      <ion-input formControlName="name" placeholder="Nome"></ion-input>
+      <ion-input formControlName="name" placeholder="Nome" [clearInput]="true" labelPlacement="stacked"></ion-input>
+      
     </div>
 
     <div class="input-container">
       <ion-icon name="card-outline"></ion-icon>
-      <ion-input formControlName="cpf" placeholder="CPF"></ion-input>
+      <ion-input formControlName="cpf" placeholder="CPF" [clearInput]="true" labelPlacement="stacked"></ion-input>
     </div>
 
     <div class="input-container">
       <ion-icon name="mail-outline"></ion-icon>
-      <ion-input formControlName="email" placeholder="Email"></ion-input>
+      <ion-input formControlName="email" placeholder="Email" [clearInput]="true" labelPlacement="stacked"></ion-input>
     </div>
 
     <div class="input-container">
       <ion-icon name="call-outline"></ion-icon>
-      <ion-input formControlName="phone" placeholder="Telefone"></ion-input>
+      <ion-input formControlName="phone" placeholder="Telefone" [clearInput]="true" labelPlacement="stacked"></ion-input>
     </div>
 
     <div class="input-container">
       <ion-icon name="home-outline"></ion-icon>
-      <ion-input formControlName="address" placeholder="Endereço"></ion-input>
+      <ion-input formControlName="address" placeholder="Endereço" [clearInput]="true" labelPlacement="stacked"></ion-input>
     </div>
 
     <div class="input-container">

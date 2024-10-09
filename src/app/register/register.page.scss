@@ -63,6 +63,10 @@ ion-content {
     &::placeholder {
       color: #C2272D;
     }
+
+    ::ng-deep .input-clear-icon {
+      color: #C2272D !important;
+    }
   }
 
   ion-icon:last-of-type {
