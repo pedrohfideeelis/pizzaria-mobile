@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Cadastro</ion-title>
   </ion-toolbar>
@@ -103,5 +103,58 @@
     <ion-button expand="full" type="submit" [disabled]="!registerForm.valid"
       >Registrar</ion-button
     >
+  </form>
+</ion-content> -->
+
+<ion-content>
+  <div class="header-container">
+    <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    <h1>Cadastro</h1>
+  </div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="perfil-form">
+    <div class="input-container">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-input formControlName="name" placeholder="Nome"></ion-input>
+    </div>
+
+    <div class="input-container">
+      <ion-icon name="card-outline"></ion-icon>
+      <ion-input formControlName="cpf" placeholder="CPF"></ion-input>
+    </div>
+
+    <div class="input-container">
+      <ion-icon name="mail-outline"></ion-icon>
+      <ion-input formControlName="email" placeholder="Email"></ion-input>
+    </div>
+
+    <div class="input-container">
+      <ion-icon name="call-outline"></ion-icon>
+      <ion-input formControlName="phone" placeholder="Telefone"></ion-input>
+    </div>
+
+    <div class="input-container">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-input formControlName="address" placeholder="Endereço"></ion-input>
+    </div>
+
+    <div class="input-container">
+      <ion-icon name="lock-closed-outline"></ion-icon>
+      <ion-input formControlName="password" placeholder="Senha" type="password"></ion-input>
+      <ion-icon name="eye-outline" (click)="togglePasswordVisibility('password')"></ion-icon>
+    </div>
+
+    <div class="input-container">
+      <ion-icon name="lock-closed-outline"></ion-icon>
+      <ion-input formControlName="confirmPassword" placeholder="Confirmar Senha" type="password"></ion-input>
+      <ion-icon name="eye-outline" (click)="togglePasswordVisibility('confirmPassword')"></ion-icon>
+    </div>
+
+    <div class="button-container">
+      <ion-button expand="block" type="submit" [disabled]="!registerForm.valid" class="register-button">
+        Cadastrar
+      </ion-button>
+      <span class="login-link">Já tenho cadastro</span>
+    </div>
   </form>
 </ion-content>
