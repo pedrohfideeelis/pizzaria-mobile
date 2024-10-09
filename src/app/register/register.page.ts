@@ -240,6 +240,10 @@ export class RegisterPage implements OnInit {
     this.navCtrl.back();
   }
 
+  goToLogin() {
+    this.navCtrl.navigateForward('/login');
+  }
+
   // Alterna a visibilidade das senhas
   togglePasswordVisibility(inputType: string) {
     const input = document.querySelector(`ion-input[formControlName=${inputType}]`) as HTMLInputElement;

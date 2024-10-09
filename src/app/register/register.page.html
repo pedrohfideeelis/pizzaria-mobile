@@ -8,12 +8,13 @@
     <div class="input-container">
       <ion-icon name="person-outline"></ion-icon>
       <ion-input formControlName="name" placeholder="Nome" [clearInput]="true" labelPlacement="stacked"></ion-input>
-      
+
     </div>
 
     <div class="input-container">
       <ion-icon name="card-outline"></ion-icon>
-      <ion-input formControlName="cpf" placeholder="CPF" [clearInput]="true" labelPlacement="stacked"></ion-input>
+      <ion-input formControlName="cpf" placeholder="CPF" [clearInput]="true" labelPlacement="stacked"
+        (ionInput)="formatCPF($event)"></ion-input>
     </div>
 
     <div class="input-container">
@@ -23,12 +24,14 @@
 
     <div class="input-container">
       <ion-icon name="call-outline"></ion-icon>
-      <ion-input formControlName="phone" placeholder="Telefone" [clearInput]="true" labelPlacement="stacked"></ion-input>
+      <ion-input formControlName="phone" placeholder="Telefone" [clearInput]="true" labelPlacement="stacked"
+        (ionInput)="formatPhone($event)"></ion-input>
     </div>
 
     <div class="input-container">
       <ion-icon name="home-outline"></ion-icon>
-      <ion-input formControlName="address" placeholder="Endereço" [clearInput]="true" labelPlacement="stacked"></ion-input>
+      <ion-input formControlName="address" placeholder="Endereço" [clearInput]="true"
+        labelPlacement="stacked"></ion-input>
     </div>
 
     <div class="input-container">
@@ -47,7 +50,7 @@
       <ion-button expand="block" type="submit" [disabled]="!registerForm.valid" class="register-button">
         Cadastrar
       </ion-button>
-      <span class="login-link">Já tenho cadastro</span>
+      <span class="login-link" (click)="goToLogin()">Já tenho cadastro</span>
     </div>
   </form>
 </ion-content>
