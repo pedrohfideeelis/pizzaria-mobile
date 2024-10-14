@@ -109,5 +109,6 @@ export class CartComponent implements OnInit {
     this.discountAmount = 0; // Reseta o desconto ao limpar o carrinho
     this.totalPrice = 0; // Reseta o total ao limpar o carrinho
     this.originalPrice = 0; // Reseta o preço original ao limpar o carrinho
+    this.couponCode = '';
   }
 }

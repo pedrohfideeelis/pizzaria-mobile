@@ -1,15 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Carrinho</ion-title>
+<ion-content>
+  <div class="header-container">
+    <h3>Carrinho</h3>
     <ion-buttons slot="end">
       <ion-button (click)="closeCart()">
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+  </div>
 
-<ion-content>
   <ion-list *ngIf="cartItems.length > 0; else emptyCart">
     <ion-item *ngFor="let item of cartItems; let i = index">
       <ion-thumbnail slot="start">
@@ -17,11 +15,10 @@
       </ion-thumbnail>
       <ion-label>
         <h2>{{ item.pizza.name }} ({{ item.size }})</h2>
-        <p>{{ item.notes }}</p>
         <h3>{{ item.totalPrice | currency : 'BRL' }}</h3>
         <div>
           <ion-button (click)="decreaseQuantity(item)" [disabled]="item.quantity <= 1">-</ion-button>
-          <ion-badge color="primary">{{ item.quantity }}</ion-badge>
+          <ion-badge>{{ item.quantity }}</ion-badge>
           <ion-button (click)="increaseQuantity(item)">+</ion-button>
         </div>
       </ion-label>
@@ -34,31 +31,32 @@
   </ion-list>
 
   <ng-template #emptyCart>
-    <ion-item>
-      <ion-label>Carrinho vazio</ion-label>
-    </ion-item>
+    <p class="empty-cart">CARRINHO VAZIO</p>
   </ng-template>
 
-  <ion-item>
+  <ion-button (click)="clearCart()" class="clear-cart-button" color="secondary">LIMPAR CARRINHO
+    <ion-icon name="close-circle-outline"></ion-icon>
+  </ion-button>
+
+  <div class="total">
     <ion-label>Total</ion-label>
-    <ion-note [ngStyle]="{ 'color': totalPrice < originalPrice ? '#C2272D' : 'black' }">
-      <span *ngIf="totalPrice < originalPrice" style="text-decoration: line-through;">
-        {{ originalPrice | currency: 'BRL' }}
-      </span>
+    <ion-note>
       {{ totalPrice | currency: 'BRL' }}
     </ion-note>
-  </ion-item>
+  </div>
 
-  <ion-item>
-    <ion-label position="stacked">Cupom de Desconto</ion-label>
+  <div class="coupon-title">
+    <h3>CUPOM</h3>
+  </div>
+
+  <div class="coupon-container">
     <ion-input type="text" [(ngModel)]="couponCode" placeholder="Digite seu cupom"></ion-input>
     <ion-button (click)="applyCoupon()" [disabled]="isCouponApplied">Aplicar</ion-button>
-  </ion-item>
+  </div>
 
-  <ion-button (click)="clearCart()" class="clear-cart-button">Limpar Carrinho</ion-button>
 
 </ion-content>
 
 <ion-footer>
-  <ion-button expand="block" (click)="confirmPurchase()">Confirmar Compra</ion-button>
+  <ion-button expand="block" (click)="confirmPurchase()">Confirmar</ion-button>
 </ion-footer>
