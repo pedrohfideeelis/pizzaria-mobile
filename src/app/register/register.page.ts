@@ -113,6 +113,8 @@ import { NavController } from '@ionic/angular';
 })
 export class RegisterPage implements OnInit {
   registerForm!: FormGroup;
+  showPassword = false;
+  showConfirmPassword = false;
 
   constructor(private formBuilder: FormBuilder, private navCtrl: NavController) { }
 
@@ -127,8 +129,7 @@ export class RegisterPage implements OnInit {
         address: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
-      },
-      { validator: this.mustMatch('password', 'confirmPassword') }
+      }
     );
   }
 
@@ -244,11 +245,11 @@ export class RegisterPage implements OnInit {
     this.navCtrl.navigateForward('/login');
   }
 
-  // Alterna a visibilidade das senhas
-  togglePasswordVisibility(inputType: string) {
-    const input = document.querySelector(`ion-input[formControlName=${inputType}]`) as HTMLInputElement;
-    if (input) {
-      input.type = input.type === 'password' ? 'text' : 'password';
+  togglePasswordVisibility(field: string) {
+    if (field === 'password') {
+      this.showPassword = !this.showPassword;
+    } else if (field === 'confirmPassword') {
+      this.showConfirmPassword = !this.showConfirmPassword;
     }
   }
 }

@@ -36,14 +36,17 @@
 
     <div class="input-container">
       <ion-icon name="lock-closed-outline"></ion-icon>
-      <ion-input formControlName="password" placeholder="Senha" type="password"></ion-input>
-      <ion-icon name="eye-outline" (click)="togglePasswordVisibility('password')"></ion-icon>
+      <ion-input formControlName="password" placeholder="Senha" [type]="showPassword ? 'text' : 'password'"></ion-input>
+      <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+        (click)="togglePasswordVisibility('password')"></ion-icon>
     </div>
 
     <div class="input-container">
       <ion-icon name="lock-closed-outline"></ion-icon>
-      <ion-input formControlName="confirmPassword" placeholder="Confirmar Senha" type="password"></ion-input>
-      <ion-icon name="eye-outline" (click)="togglePasswordVisibility('confirmPassword')"></ion-icon>
+      <ion-input formControlName="confirmPassword" placeholder="Confirmar Senha"
+        [type]="showConfirmPassword ? 'text' : 'password'"></ion-input>
+      <ion-icon [name]="showConfirmPassword ? 'eye-off-outline' : 'eye-outline'"
+        (click)="togglePasswordVisibility('confirmPassword')"></ion-icon>
     </div>
 
     <div class="button-container">
