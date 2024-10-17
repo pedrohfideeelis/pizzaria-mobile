@@ -34,7 +34,9 @@ export class RegisterPage implements OnInit {
   // Função para formatar o CPF conforme o usuário digita
   formatCPF(event: any) {
     let value = event.target.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-
+    if (value.length > 11) {
+      value = value.substring(0, 11); // Limita a 11 dígitos
+    }
     // Aplica a máscara de CPF
     value = value.replace(/(\d{3})(\d)/, '$1.$2');
     value = value.replace(/(\d{3})(\d)/, '$1.$2');
