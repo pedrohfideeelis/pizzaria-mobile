@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +12,7 @@ export class RegisterPage implements OnInit {
   showPassword = false;
   showConfirmPassword = false;
 
-  constructor(private formBuilder: FormBuilder, private navCtrl: NavController) { }
+  constructor(private formBuilder: FormBuilder, private navCtrl: NavController, private alertController: AlertController) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group(
@@ -95,13 +95,43 @@ export class RegisterPage implements OnInit {
     };
   }
 
+  generateUniqueCode(): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let code = '';
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      code += characters[randomIndex];
+    }
+    return code;
+  }
+
+  async showAlert(code: string) {
+    const message = `Cadastro concluído com sucesso!\n Código único de verificação gerado:\n ${code}\nGuarde esse código, ele será solicitado para alteração de senha e confirmação de dados.`;
+
+    const alert = await this.alertController.create({
+      header: 'Cadastro Concluído com sucesso!',
+      subHeader: 'Código de Verificação',
+      message: message,
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.navCtrl.navigateRoot('/login');
+        }
+      }]
+    });
+
+    if (typeof alert.message === 'string') {
+      alert.message = alert.message.replace(/<strong>(.*?)<\/strong>/g, `<strong>${code}</strong>`);
+    }
+    await alert.present();
+  }
+
   // Submissão do formulário
   onSubmit() {
     if (this.registerForm.valid) {
       const cpfValue = this.registerForm.get('cpf')?.value;
       const emailValue = this.registerForm.get('email')?.value;
 
-      // Verifica se o CPF e o e-mail são únicos antes de proceder
       if (!this.isCPFUnique(cpfValue)) {
         alert('CPF já cadastrado. Por favor, use outro CPF.');
         return;
@@ -112,7 +142,6 @@ export class RegisterPage implements OnInit {
         return;
       }
 
-      // Cria o novo usuário a partir do formulário
       const newUser = {
         name: this.registerForm.get('name')?.value,
         cpf: cpfValue,
@@ -122,21 +151,17 @@ export class RegisterPage implements OnInit {
         password: this.registerForm.get('password')?.value,
       };
 
-      // Obtém os usuários existentes ou inicializa um array vazio
       const storedUsers = this.getStoredUsers();
 
-      // Adiciona o novo usuário ao array
       storedUsers.push(newUser);
 
-      // Salva o array atualizado no localStorage
       localStorage.setItem('users', JSON.stringify(storedUsers));
 
-      // Navega para a página de login após o registro bem-sucedido
-      this.goToLogin();
+      const uniqueCode = this.generateUniqueCode();
+      this.showAlert(uniqueCode);
     }
   }
 
-  // Função para navegação (voltar)
   goBack() {
     this.navCtrl.back();
   }
