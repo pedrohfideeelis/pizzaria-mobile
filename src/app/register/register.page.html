@@ -7,43 +7,52 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="perfil-form">
     <div class="input-container">
       <ion-icon name="person-outline"></ion-icon>
-      <ion-input formControlName="name" placeholder="Nome" [clearInput]="true" labelPlacement="stacked"></ion-input>
-
+      <ion-input formControlName="name"
+        [placeholder]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched ? 'Nome é obrigatório' : 'Nome'"
+        [clearInput]="true" labelPlacement="stacked"></ion-input>
     </div>
 
     <div class="input-container">
       <ion-icon name="card-outline"></ion-icon>
-      <ion-input formControlName="cpf" placeholder="CPF" [clearInput]="true" labelPlacement="stacked"
-        (ionInput)="formatCPF($event)"></ion-input>
+      <ion-input formControlName="cpf"
+        [placeholder]="registerForm.get('cpf')?.invalid && registerForm.get('cpf')?.touched ? 'CPF é obrigatório' : 'CPF'"
+        [clearInput]="true" labelPlacement="stacked" (ionInput)="formatCPF($event)"></ion-input>
     </div>
 
     <div class="input-container">
       <ion-icon name="mail-outline"></ion-icon>
-      <ion-input formControlName="email" placeholder="Email" [clearInput]="true" labelPlacement="stacked"></ion-input>
+      <ion-input formControlName="email"
+        [placeholder]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'Email é obrigatório' : 'Email'"
+        [clearInput]="true" labelPlacement="stacked"></ion-input>
     </div>
 
     <div class="input-container">
       <ion-icon name="call-outline"></ion-icon>
-      <ion-input formControlName="phone" placeholder="Telefone" [clearInput]="true" labelPlacement="stacked"
-        (ionInput)="formatPhone($event)"></ion-input>
+      <ion-input formControlName="phone"
+        [placeholder]="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched ? 'Telefone é obrigatório' : 'Telefone'"
+        [clearInput]="true" labelPlacement="stacked" (ionInput)="formatPhone($event)"></ion-input>
     </div>
 
     <div class="input-container">
       <ion-icon name="home-outline"></ion-icon>
-      <ion-input formControlName="address" placeholder="Endereço" [clearInput]="true"
-        labelPlacement="stacked"></ion-input>
+      <ion-input formControlName="address"
+        [placeholder]="registerForm.get('address')?.invalid && registerForm.get('address')?.touched ? 'Endereço é obrigatório' : 'Endereço'"
+        [clearInput]="true" labelPlacement="stacked"></ion-input>
     </div>
 
     <div class="input-container">
       <ion-icon name="lock-closed-outline"></ion-icon>
-      <ion-input formControlName="password" placeholder="Senha" [type]="showPassword ? 'text' : 'password'"></ion-input>
+      <ion-input formControlName="password"
+        [placeholder]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'Mínimo 6 caracteres' : 'Senha'"
+        [type]="showPassword ? 'text' : 'password'"></ion-input>
       <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
         (click)="togglePasswordVisibility('password')"></ion-icon>
     </div>
 
     <div class="input-container">
       <ion-icon name="lock-closed-outline"></ion-icon>
-      <ion-input formControlName="confirmPassword" placeholder="Confirmar Senha"
+      <ion-input formControlName="confirmPassword"
+        [placeholder]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched ? 'Mínimo 6 caracteres' : 'Confirmar Senha'"
         [type]="showConfirmPassword ? 'text' : 'password'"></ion-input>
       <ion-icon [name]="showConfirmPassword ? 'eye-off-outline' : 'eye-outline'"
         (click)="togglePasswordVisibility('confirmPassword')"></ion-icon>

@@ -132,7 +132,7 @@ export class RegisterPage implements OnInit {
       localStorage.setItem('users', JSON.stringify(storedUsers));
 
       // Navega para a página de login após o registro bem-sucedido
-      this.navCtrl.navigateRoot('/login');
+      this.goToLogin();
     }
   }
 
