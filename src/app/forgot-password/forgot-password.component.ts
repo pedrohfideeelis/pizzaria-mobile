@@ -10,6 +10,8 @@ export class ForgotPasswordComponent {
   verificationCode: string = '';
   newPassword: string = '';
   confirmPassword: string = '';
+  showPassword = false;
+  showConfirmPassword = false;
 
   constructor(private navCtrl: NavController, private alertController: AlertController) { }
 
@@ -50,5 +52,14 @@ export class ForgotPasswordComponent {
     });
 
     await alert.present();
+  }
+
+  // Função para alternar a visibilidade da senha
+  togglePasswordVisibility(field: string) {
+    if (field === 'password') {
+      this.showPassword = !this.showPassword;
+    } else if (field === 'confirmPassword') {
+      this.showConfirmPassword = !this.showConfirmPassword;
+    }
   }
 }
