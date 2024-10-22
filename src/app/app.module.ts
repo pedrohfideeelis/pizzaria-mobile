@@ -8,9 +8,10 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
-  declarations: [AppComponent, CartComponent],
+  declarations: [AppComponent, CartComponent, ForgotPasswordComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },[provideNgxMask()],],
   bootstrap: [AppComponent],

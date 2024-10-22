@@ -141,6 +141,8 @@ export class RegisterPage implements OnInit {
         alert('E-mail já cadastrado. Por favor, use outro e-mail.');
         return;
       }
+      
+      const uniqueCode = this.generateUniqueCode();
 
       const newUser = {
         name: this.registerForm.get('name')?.value,
@@ -149,6 +151,7 @@ export class RegisterPage implements OnInit {
         email: emailValue,
         address: this.registerForm.get('address')?.value,
         password: this.registerForm.get('password')?.value,
+        verificationCode: uniqueCode
       };
 
       const storedUsers = this.getStoredUsers();
@@ -157,7 +160,6 @@ export class RegisterPage implements OnInit {
 
       localStorage.setItem('users', JSON.stringify(storedUsers));
 
-      const uniqueCode = this.generateUniqueCode();
       this.showAlert(uniqueCode);
     }
   }
