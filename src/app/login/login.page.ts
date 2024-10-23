@@ -54,6 +54,7 @@ export class LoginPage implements OnInit {
 
         if (user) {
           localStorage.setItem('loggedInUser', JSON.stringify(user));
+          localStorage.setItem('loggedInUserEmail', email);
           this.navCtrl.navigateRoot('/tabs');
         } else {
           alert('Credenciais inválidas');

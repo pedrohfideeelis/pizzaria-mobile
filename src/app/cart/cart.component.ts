@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
   discountAmount: number = 0; // Para armazenar o valor do desconto aplicado
   isCouponApplied: boolean = false;
 
-  constructor(private cartService: CartService, private modalCtrl: ModalController, private alertCtrl: AlertController) { }
+  constructor(private cartService: CartService, private modalCtrl: ModalController, private alertCtrl: AlertController, private navCtrl: NavController) { }
 
   ngOnInit() {
     // Inscreve-se para receber atualizações dos itens do carrinho
@@ -68,13 +68,17 @@ export class CartComponent implements OnInit {
   }
 
   async confirmPurchase() {
-    if (this.couponCode) {
-      this.cartService.markCouponAsUsed(this.couponCode); // Marcar como utilizado
-      await this.showAlert('Compra Confirmada', 'Sua compra foi realizada com sucesso!');
+    if (this.cartItems.length > 0) {
+      if (this.couponCode) {
+        this.cartService.markCouponAsUsed(this.couponCode); // Marcar como utilizado
+        this.clearCoupon(); // Limpa o campo do cupom e o estado do botão
+      }
 
-      // Limpa o campo do cupom e o estado do botão
-      this.clearCoupon();
-      this.cartService.resetCoupon(this.couponCode); // Reseta o estado do cupom
+      // Fechar o modal e depois redirecionar
+      await this.modalCtrl.dismiss();  // Certifique-se de fechar o modal antes de redirecionar
+      this.navCtrl.navigateForward('/checkout');  // Redireciona para a página de checkout
+    } else {
+      await this.showAlert('Carrinho Vazio', 'Adicione itens ao carrinho antes de confirmar.');
     }
   }
 
