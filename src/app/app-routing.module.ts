@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -24,9 +25,15 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
+  {
+    path: 'forgot-password', component: ForgotPasswordComponent
+  },
+  {
+    path: 'checkout', component: CheckoutComponent
+  },
   { 
-    path: 'forgot-password', component: ForgotPasswordComponent 
-  }
+    path: '**', redirectTo: 'welcome'
+  },
 ];
 @NgModule({
   imports: [
