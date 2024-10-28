@@ -70,13 +70,13 @@ export class CartComponent implements OnInit {
   async confirmPurchase() {
     if (this.cartItems.length > 0) {
       if (this.couponCode) {
-        this.cartService.markCouponAsUsed(this.couponCode); // Marcar como utilizado
-        this.clearCoupon(); // Limpa o campo do cupom e o estado do botão
+        this.cartService.markCouponAsUsed(this.couponCode);
+        this.clearCoupon();
       }
 
-      // Fechar o modal e depois redirecionar
-      await this.modalCtrl.dismiss();  // Certifique-se de fechar o modal antes de redirecionar
-      this.navCtrl.navigateForward('/checkout');  // Redireciona para a página de checkout
+      // Fechar o modal e redirecionar para a página de checkout
+      await this.modalCtrl.dismiss();  
+      this.navCtrl.navigateForward('/checkout');
     } else {
       await this.showAlert('Carrinho Vazio', 'Adicione itens ao carrinho antes de confirmar.');
     }

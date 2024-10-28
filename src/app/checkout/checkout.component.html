@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Carrinho</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>Entregar em:</ion-card-header>
+    <ion-card-content>
+      <p>{{ address }}</p>
+      <ion-button (click)="editAddress()">Alterar Endereço</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="delivery-time">
+    <h3>Entrega padrão</h3>
+    <span>30 - 40 min</span>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let item of cartItems">
+      <ion-thumbnail slot="start">
+        <img [src]="item.pizza.imageUrl" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.pizza.name }} ({{ item.size }})</h2>
+        <h3>{{ item.totalPrice | currency : 'BRL' }}</h3>
+        <div class="quantity-control">
+          <ion-button (click)="decreaseQuantity(item)" [disabled]="item.quantity <= 1">-</ion-button>
+          <ion-badge>{{ item.quantity }}</ion-badge>
+          <ion-button (click)="increaseQuantity(item)">+</ion-button>
+        </div>
+      </ion-label>
+      <ion-button (click)="removeItem(item)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label>Pagamento</ion-label>
+    <ion-select [(ngModel)]="paymentMethod" interface="popover">
+      <ion-select-option value="CREDIT_CARD">Cartão de Crédito</ion-select-option>
+      <ion-select-option value="PIX">PIX</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-footer>
+    <ion-button expand="block" color="primary" (click)="placeOrder()">FAZER PEDIDO</ion-button>
+  </ion-footer>
+</ion-content>
+
+<ion-modal *ngIf="showAddressModal">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Alterar Endereço</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeModal()">Fechar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-item>
+      <ion-label position="floating">Novo Endereço</ion-label>
+      <ion-input [(ngModel)]="newAddress"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="saveNewAddress()">Salvar Novo Endereço</ion-button>
+  </ion-content>
+</ion-modal>
