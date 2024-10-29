@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { AddressModalComponent } from '../address-modal/address-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -14,21 +15,29 @@ export class CheckoutComponent implements OnInit {
   paymentMethod: string = 'PIX';
   showAddressModal: boolean = false;
   newAddress = "";
+  totalAmount: number = 0;
 
   constructor(
     private cartService: CartService,
     private navCtrl: NavController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private alertController: AlertController,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
     const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-    this.address = user.address || 'Endereço não disponível'; //
+    this.address = user.address || 'Endereço não disponível';
+    this.calculateTotal();
   }
 
   goBack() {
     this.navCtrl.back();
+  }
+
+  calculateTotal() {
+    this.totalAmount = this.cartItems.reduce((total, item) => total + (item.totalPrice * item.quantity), 0);
   }
 
   async editAddress() {
@@ -64,17 +73,27 @@ export class CheckoutComponent implements OnInit {
   }
 
   removeItem(item: any) {
-    this.cartService.removeFromCart(item);
-    this.cartItems = this.cartService.getCartItems(); // Atualiza os itens após a remoção
+    this.cartItems = this.cartItems.filter(cartItem => cartItem !== item);
+    this.calculateTotal();
+
+    if (this.cartItems.length === 0) {
+      this.totalAmount = 0;
+
+      this.modalCtrl.dismiss().catch(() => {
+        this.router.navigate(['/tabs/home']);
+      });
+    }
   }
 
   increaseQuantity(item: any) {
     this.cartService.updateQuantity(item, item.quantity + 1);
+    this.calculateTotal();
   }
 
   decreaseQuantity(item: any) {
     if (item.quantity > 1) {
       this.cartService.updateQuantity(item, item.quantity - 1);
+      this.calculateTotal();
     }
   }
 
@@ -96,8 +115,13 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  placeOrder() {
-    this.cartService.clearCart(); // Limpa o carrinho após realizar o pedido
-    this.navCtrl.navigateRoot('/order-confirmation'); // Redireciona para a página de confirmação
+  async placeOrder() {
+    const alert = await this.alertController.create({
+      header: 'Pedido Enviado!',
+      message: 'SEU PEDIDO FOI ENVIADO! O tempo estimado para entrega é de 30 - 40 minutos.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }
