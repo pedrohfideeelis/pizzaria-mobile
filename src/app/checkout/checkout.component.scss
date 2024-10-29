@@ -1,0 +1,179 @@
+/* Estilo geral */
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #f7f7f7;
+    /* Fundo suave */
+}
+
+/* Header */
+ion-header {
+    ion-toolbar {
+        --background: #ffffff;
+
+        ion-title {
+            font-weight: bold;
+            color: #c4001d;
+            /* Cor vermelha */
+        }
+    }
+}
+
+/* Card do endereço */
+ion-card {
+    margin: 10px;
+    background-color: #f1f1f1;
+    /* Fundo do card do endereço */
+    border-radius: 12px;
+
+    ion-card-header {
+        font-weight: bold;
+        color: #c4001d;
+        /* Cor do título 'Entregar em:' */
+        font-size: 1.1rem;
+    }
+
+    ion-card-content {
+        color: #666;
+        /* Cor do endereço */
+        font-size: 0.9rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .address {
+            flex: 1;
+        }
+
+        ion-button {
+            height: 30px;
+            width: 150px;
+            font-size: 13px;
+            //--color: #c4001d;
+            --padding-start: 0;
+            --padding-end: 0;
+            margin-left: 8px;
+        }
+    }
+}
+
+/* Informações de entrega */
+.delivery-time {
+    margin: 10px 16px;
+    color: #c4001d;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+        margin: 0;
+    }
+
+    span {
+        font-size: 0.9rem;
+        color: #666;
+    }
+}
+
+/* Lista de itens do pedido */
+ion-list {
+    margin: 10px 0;
+
+    ion-item {
+        --background: #f1f1f1;
+        border-radius: 12px;
+        margin: 8px 16px;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+
+        ion-thumbnail {
+            border-radius: 50%;
+            background-color: #ccc;
+            width: 60px;
+            height: 60px;
+        }
+
+        ion-label {
+            margin-left: 10px;
+            flex: 1;
+
+            h2 {
+                font-weight: bold;
+                font-size: 1rem;
+                margin: 0;
+            }
+
+            h3 {
+                font-weight: normal;
+                color: #666;
+                font-size: 0.9rem;
+                margin: 4px 0;
+            }
+
+            .quantity-control {
+                display: flex;
+                align-items: center;
+                margin-top: 5px;
+
+                ion-button {
+                    width: 25px;
+                    --padding-start: 0;
+                    --padding-end: 0;
+                    font-size: 1.2rem;
+                }
+
+                ion-badge {
+                    margin: 0 8px;
+                    font-size: 1rem;
+                    color: #fff;
+                    background-color: #c4001d;
+                }
+            }
+        }
+
+        ion-button {
+            width: 25px;
+            height: 35px;
+            --padding-start: 0;
+            --padding-end: 0;
+
+            ion-icon {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+
+/* Pagamento */
+ion-item {
+    margin: 10px 16px;
+    color: #c4001d;
+    font-weight: bold;
+
+    ion-label {
+        font-size: 1rem;
+    }
+
+    ion-select {
+        font-size: 1rem;
+        color: #666;
+    }
+}
+
+/* Botão de fazer pedido */
+ion-footer {
+    padding: 0 16px 20px;
+
+    ion-button {
+        --background: #c4001d;
+        /* Fundo vermelho */
+        --color: #fff;
+        /* Texto branco */
+        font-weight: bold;
+        font-size: 1.2rem;
+        border-radius: 8px;
+    }
+}

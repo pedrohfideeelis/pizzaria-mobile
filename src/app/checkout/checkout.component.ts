@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { NavController, ModalController } from '@ionic/angular';
+import { AddressModalComponent } from '../address-modal/address-modal.component';
 
 @Component({
   selector: 'app-checkout',
@@ -12,7 +13,7 @@ export class CheckoutComponent implements OnInit {
   address: string | null = null;
   paymentMethod: string = 'PIX';
   showAddressModal: boolean = false;
-  newAddress: string = '';
+  newAddress = "";
 
   constructor(
     private cartService: CartService,
@@ -22,15 +23,30 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
-    this.address = this.getUserAddress(); // Obtém o endereço do usuário do LocalStorage
+    const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+    this.address = user.address || 'Endereço não disponível'; //
   }
 
   goBack() {
     this.navCtrl.back();
   }
 
-  editAddress() {
-    this.showAddressModal = true;
+  async editAddress() {
+    const modal = await this.modalCtrl.create({
+      component: AddressModalComponent,
+      componentProps: { address: this.address }
+    });
+
+    modal.onDidDismiss().then((data) => {
+      if (data.data) {
+        this.address = data.data;
+        const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+        user.address = this.address;
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
+      }
+    });
+
+    return await modal.present();
   }
 
   closeModal() {
@@ -38,8 +54,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   saveNewAddress() {
-    this.address = this.newAddress; // Atualiza a propriedade address do componente
-    this.updateUserAddress(this.newAddress); // Atualiza o endereço no LocalStorage
+    this.address = this.newAddress;
+
+    const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+    user.address = this.newAddress;
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
+
     this.closeModal();
   }
 
@@ -76,10 +96,8 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  // placeOrder() {
-  //   // Lógica para confirmar pedido
-  //   console.log("Pedido realizado com pagamento via", this.paymentMethod);
-  //   this.cartService.clearCart(); // Limpa o carrinho após realizar o pedido
-  //   this.navCtrl.navigateRoot('/order-confirmation'); // Redireciona para a página de confirmação
-  // }
+  placeOrder() {
+    this.cartService.clearCart(); // Limpa o carrinho após realizar o pedido
+    this.navCtrl.navigateRoot('/order-confirmation'); // Redireciona para a página de confirmação
+  }
 }
