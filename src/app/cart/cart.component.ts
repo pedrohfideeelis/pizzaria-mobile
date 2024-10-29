@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { ModalController, AlertController, NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,11 @@ export class CartComponent implements OnInit {
   discountAmount: number = 0; // Para armazenar o valor do desconto aplicado
   isCouponApplied: boolean = false;
 
-  constructor(private cartService: CartService, private modalCtrl: ModalController, private alertCtrl: AlertController, private navCtrl: NavController) { }
+  constructor(private cartService: CartService,
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
+    private navCtrl: NavController,
+  ) { }
 
   ngOnInit() {
     // Inscreve-se para receber atualizações dos itens do carrinho
@@ -75,7 +80,7 @@ export class CartComponent implements OnInit {
       }
 
       // Fechar o modal e redirecionar para a página de checkout
-      await this.modalCtrl.dismiss();  
+      await this.modalCtrl.dismiss();
       this.navCtrl.navigateForward('/checkout');
     } else {
       await this.showAlert('Carrinho Vazio', 'Adicione itens ao carrinho antes de confirmar.');
@@ -114,5 +119,6 @@ export class CartComponent implements OnInit {
     this.totalPrice = 0; // Reseta o total ao limpar o carrinho
     this.originalPrice = 0; // Reseta o preço original ao limpar o carrinho
     this.couponCode = '';
+    this.modalCtrl.dismiss();
   }
 }
