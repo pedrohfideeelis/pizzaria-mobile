@@ -87,6 +87,6 @@ export class OrderTrackingComponent implements OnInit {
         this.orderStatusColor = 'success'; // Verde
         clearInterval(this.statusInterval); // Para o intervalo após o último estado
       }
-    }, 3000); // Intervalo de 30 segundos
+    }, 10000);
   }
 }
