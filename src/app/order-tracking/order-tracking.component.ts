@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { OrderStatusService } from '../services/order-status.service';
 
 @Component({
   selector: 'app-order-tracking',
@@ -17,7 +18,7 @@ export class OrderTrackingComponent implements OnInit {
   orderStatusColor = 'danger';
   statusInterval: any;
 
-  constructor(private router: Router, private navCtrl: NavController) {
+  constructor(private router: Router, private navCtrl: NavController, private orderStatusService: OrderStatusService) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as {
       orderItems: any[];
@@ -35,12 +36,22 @@ export class OrderTrackingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.orderStatusService.startStatusUpdate();
+
+    this.orderItems = this.orderStatusService.orderItems;
+    this.totalAmount = this.orderStatusService.totalAmount;
+    this.address = this.orderStatusService.address;
+    this.paymentMethod = this.orderStatusService.paymentMethod;
+
+    this.orderStatusService.startStatusUpdate();
+    this.orderStatusService.orderStatus$.subscribe(status => this.orderStatus = status);
+    this.orderStatusService.orderStatusColor$.subscribe(color => this.orderStatusColor = color);
+
     this.calculateDeliveryTime();
-    this.startStatusUpdate();
   }
 
   ngOnDestroy() {
-    clearInterval(this.statusInterval);
+    this.orderStatusService.stopStatusUpdate();
   }
 
   goBack() {
@@ -53,40 +64,12 @@ export class OrderTrackingComponent implements OnInit {
 
   calculateDeliveryTime() {
     const currentTime = new Date();
-
-    // Cálculo para 30 minutos
     const deliveryStart = new Date(currentTime);
     deliveryStart.setMinutes(currentTime.getMinutes() + 30);
-
-    // Cálculo para 40 minutos
     const deliveryEnd = new Date(currentTime);
     deliveryEnd.setMinutes(currentTime.getMinutes() + 40);
 
-    // Formatar para exibir apenas as horas e minutos
     const options: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' };
-    const startFormatted = deliveryStart.toLocaleTimeString([], options);
-    const endFormatted = deliveryEnd.toLocaleTimeString([], options);
-
-    this.deliveryTime = `Hoje, ${startFormatted} - ${endFormatted}`;
-  }
-
-  startStatusUpdate() {
-    let count = 0;
-
-    this.statusInterval = setInterval(() => {
-      count++;
-
-      if (count === 1) {
-        this.orderStatus = 'Seu pedido está sendo preparado';
-        this.orderStatusColor = 'danger'; // Vermelho
-      } else if (count === 2) {
-        this.orderStatus = 'Seu pedido está a caminho';
-        this.orderStatusColor = 'warning'; // Amarelo
-      } else if (count === 3) {
-        this.orderStatus = 'Seu pedido chegou!';
-        this.orderStatusColor = 'success'; // Verde
-        clearInterval(this.statusInterval); // Para o intervalo após o último estado
-      }
-    }, 10000);
+    this.deliveryTime = `Hoje, ${deliveryStart.toLocaleTimeString([], options)} - ${deliveryEnd.toLocaleTimeString([], options)}`;
   }
 }

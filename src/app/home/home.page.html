@@ -67,4 +67,9 @@
       </div>
     </div>
   </div>
+
+  <ion-button *ngIf="orderInProgress" expand="block" color="danger" (click)="goToOrderTracking()"
+    class="order-in-progress-button">
+    Pedido em andamento
+  </ion-button>
 </ion-content>

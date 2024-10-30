@@ -3,6 +3,7 @@ import { CartService } from '../services/cart.service';
 import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { AddressModalComponent } from '../address-modal/address-modal.component';
 import { NavigationExtras, Router } from '@angular/router';
+import { OrderStatusService } from '../services/order-status.service';
 
 @Component({
   selector: 'app-checkout',
@@ -11,7 +12,7 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class CheckoutComponent implements OnInit {
   cartItems: any[] = [];
-  address: string | null = null;
+  address = "";
   paymentMethod: string = 'PIX';
   showAddressModal: boolean = false;
   newAddress = "";
@@ -22,7 +23,8 @@ export class CheckoutComponent implements OnInit {
     private navCtrl: NavController,
     private modalCtrl: ModalController,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private orderStatusService: OrderStatusService
   ) { }
 
   ngOnInit() {
@@ -131,6 +133,7 @@ export class CheckoutComponent implements OnInit {
                 paymentMethod: this.paymentMethod
               }
             };
+            this.orderStatusService.setOrderData(this.cartItems, this.totalAmount, this.address, this.paymentMethod);
             this.router.navigate(['order-tracking'], navigationExtras);
           }
         }

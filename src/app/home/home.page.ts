@@ -5,6 +5,8 @@ import { PizzaService } from '../services/pizza.service';
 import { Pizza } from '../../models/pizza.model';
 import { CartService } from '../services/cart.service';
 import { CartComponent } from '../cart/cart.component';
+import { OrderStatusService } from '../services/order-status.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'home-page',
@@ -19,12 +21,19 @@ export class Home implements OnInit {
   firstName: string = '';
   cartItemCount: number = 0;
   slideIndex: number = 0;
+  orderInProgress = false;
 
   private preferidasID: number[] = [6, 5, 8, 1];
   private sushiID: number[] = [1, 4, 6];
   private popularesID: number[] = [8, 7, 5, 2];
 
-  constructor(private modalCtrl: ModalController, private pizzaService: PizzaService, private cartService: CartService) { }
+  constructor(
+    private modalCtrl: ModalController,
+    private pizzaService: PizzaService,
+    private cartService: CartService,
+    private orderStatusService: OrderStatusService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.updateCartCount();
@@ -37,6 +46,10 @@ export class Home implements OnInit {
     if (loggedInUser && loggedInUser.name) {
       this.firstName = loggedInUser.name.split(' ')[0];
     }
+
+    this.orderStatusService.orderStatus$.subscribe(status => {
+      this.orderInProgress = status !== 'Seu pedido chegou!';
+    });
   }
 
   ngAfterViewInit() {
@@ -81,5 +94,9 @@ export class Home implements OnInit {
     this.cartService.cartItemCount$.subscribe(count => {
       this.cartItemCount = count;
     });
+  }
+
+  goToOrderTracking() {
+    this.router.navigate(['/order-tracking']);
   }
 }

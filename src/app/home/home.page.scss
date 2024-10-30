@@ -80,6 +80,16 @@ ion-content {
         }
     }
 
+    .order-in-progress-button {
+        position: fixed;
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        z-index: 100;
+        font-weight: bold;
+        border-radius: 8px;
+    }
+
 }
 
 
