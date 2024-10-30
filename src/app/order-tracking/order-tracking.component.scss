@@ -1,0 +1,157 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #f7f7f7;
+}
+
+/* Header */
+ion-header {
+    ion-toolbar {
+        --background: #ffffff;
+
+        ion-title {
+            font-weight: bold;
+            color: #c4001d;
+        }
+
+        ion-button {
+            color: #c4001d;
+        }
+    }
+}
+
+/* Seção de Previsão de Entrega */
+.delivery-estimate {
+    text-align: center;
+    margin: 16px;
+    padding: 16px;
+    background-color: #c4001d;
+    color: white;
+    border-radius: 12px;
+
+    .header {
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .time {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-top: 4px;
+    }
+}
+
+/* Status do Pedido */
+.order-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 16px;
+    color: #666;
+    font-size: 0.9rem;
+
+    ion-icon {
+        font-size: 0.8rem;
+        margin-right: 8px;
+        color: #ffc107;
+        /* Cor de alerta */
+    }
+
+    strong {
+        color: #666;
+    }
+}
+
+/* Card do Endereço */
+ion-card {
+    margin: 16px;
+    background-color: #f1f1f1;
+    border-radius: 12px;
+
+    ion-card-header {
+        font-weight: bold;
+        color: #c4001d;
+        font-size: 1.1rem;
+    }
+
+    ion-card-content {
+        color: #666;
+        font-size: 0.9rem;
+    }
+}
+
+/* Lista de Itens do Pedido */
+.section-title {
+    margin: 16px;
+    font-weight: bold;
+    color: #c4001d;
+}
+
+ion-list {
+    margin: 10px 0;
+
+    ion-item {
+        --background: #f1f1f1;
+        border-radius: 12px;
+        margin: 8px 16px;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+
+        ion-thumbnail {
+            border-radius: 50%;
+            background-color: #ccc;
+            width: 60px;
+            height: 60px;
+        }
+
+        ion-label {
+            margin-left: 10px;
+
+            h2 {
+                font-weight: bold;
+                font-size: 1rem;
+                color: #c4001d;
+                margin: 0;
+            }
+
+            h3 {
+                font-weight: normal;
+                color: #666;
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+/* Valor Total do Pedido */
+ion-item[lines="none"] {
+    margin: 10px 16px;
+    color: #c4001d;
+    font-weight: bold;
+
+    ion-label {
+        font-size: 1rem;
+    }
+
+    ion-note {
+        font-size: 1rem;
+        color: #666;
+    }
+}
+
+/* Método de Pagamento */
+ion-item[lines="none"]:last-of-type {
+    margin-top: 0;
+    margin-bottom: 20px;
+
+    ion-icon {
+        font-size: 1.2rem;
+    }
+
+    ion-note {
+        font-size: 1rem;
+        color: #666;
+    }
+}

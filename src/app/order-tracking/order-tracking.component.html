@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Acompanhe seu pedido</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openHelp()">Ajuda</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Seção de Previsão de Entrega -->
+  <div class="delivery-estimate">
+    <div class="header">Previsão de entrega</div>
+    <div class="time">{{ deliveryTime }}</div>
+  </div>
+
+  <!-- Status do Pedido -->
+  <div class="order-status">
+    <ion-icon name="ellipse" color="warning"></ion-icon>
+    <span>Seu pedido está sendo <strong>{{ orderStatus }}</strong></span>
+  </div>
+
+  <!-- Endereço de Entrega -->
+  <ion-card>
+    <ion-card-header>Entregar em:</ion-card-header>
+    <ion-card-content>
+      <p>{{ address }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de Itens do Pedido -->
+  <h2 class="section-title">Pedido</h2>
+  <ion-list>
+    <ion-item *ngFor="let item of orderItems">
+      <ion-thumbnail slot="start">
+        <img [src]="item.imageUrl" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.pizza.name }} ({{ item.size }})</h2>
+        <h3>{{ item.totalPrice | currency : 'BRL' }}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Valor Total do Pedido -->
+  <ion-item lines="none">
+    <ion-label>Total</ion-label>
+    <ion-note slot="end">{{ totalAmount | currency : 'BRL' }}</ion-note>
+  </ion-item>
+
+  <!-- Método de Pagamento -->
+  <ion-item lines="none">
+    <ion-label>Pagamento</ion-label>
+    <ion-icon slot="end" name="logo-pix" color="success"></ion-icon>
+    <ion-note slot="end">{{ paymentMethod }}</ion-note>
+  </ion-item>
+</ion-content>

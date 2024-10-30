@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,9 @@ const routes: Routes = [
   },
   {
     path: 'checkout', component: CheckoutComponent
+  },
+  {
+    path: 'order-tracking', component: OrderTrackingComponent
   },
   { 
     path: '**', redirectTo: 'welcome'

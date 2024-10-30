@@ -11,9 +11,10 @@ import { CartComponent } from './cart/cart.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AddressModalComponent } from './address-modal/address-modal.component';
+import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
 
 @NgModule({
-  declarations: [AppComponent, CartComponent, ForgotPasswordComponent, CheckoutComponent, AddressModalComponent],
+  declarations: [AppComponent, CartComponent, ForgotPasswordComponent, CheckoutComponent, AddressModalComponent, OrderTrackingComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },[provideNgxMask()],],
   bootstrap: [AppComponent],

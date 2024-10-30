@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { AddressModalComponent } from '../address-modal/address-modal.component';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -119,9 +119,25 @@ export class CheckoutComponent implements OnInit {
     const alert = await this.alertController.create({
       header: 'Pedido Enviado!',
       message: 'SEU PEDIDO FOI ENVIADO! O tempo estimado para entrega é de 30 - 40 minutos.',
-      buttons: ['OK']
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            const navigationExtras: NavigationExtras = {
+              state: {
+                orderItems: this.cartItems,
+                totalAmount: this.totalAmount,
+                address: this.address,
+                paymentMethod: this.paymentMethod
+              }
+            };
+            this.router.navigate(['order-tracking'], navigationExtras);
+          }
+        }
+      ]
     });
 
     await alert.present();
   }
 }
+
