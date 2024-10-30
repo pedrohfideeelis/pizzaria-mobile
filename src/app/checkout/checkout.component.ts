@@ -118,7 +118,7 @@ export class CheckoutComponent implements OnInit {
   async placeOrder() {
     const alert = await this.alertController.create({
       header: 'Pedido Enviado!',
-      message: 'SEU PEDIDO FOI ENVIADO! O tempo estimado para entrega é de 30 - 40 minutos.',
+      message: 'O tempo estimado para entrega é de 30 - 40 minutos. O pagamento será feito no momento da entrega',
       buttons: [
         {
           text: 'OK',

@@ -5,7 +5,7 @@
     background-color: #f7f7f7;
 }
 
-/* Header */
+/* Estilo do header */
 ion-header {
     ion-toolbar {
         --background: #ffffff;
@@ -17,6 +17,7 @@ ion-header {
 
         ion-button {
             color: #c4001d;
+            font-weight: 400;
         }
     }
 }
@@ -36,7 +37,7 @@ ion-header {
     }
 
     .time {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         font-weight: bold;
         margin-top: 4px;
     }
@@ -78,30 +79,34 @@ ion-card {
     ion-card-content {
         color: #666;
         font-size: 0.9rem;
+        line-height: 1.4;
     }
 }
 
-/* Lista de Itens do Pedido */
+/* Título da Seção de Pedido */
 .section-title {
     margin: 16px;
     font-weight: bold;
     color: #c4001d;
+    font-size: 1.2rem;
+    padding-left: 10px;
+    padding-top: 5px;
 }
 
+/* Lista de Itens do Pedido */
 ion-list {
     margin: 10px 0;
 
     ion-item {
-        --background: #f1f1f1;
         border-radius: 12px;
         margin: 8px 16px;
         padding: 8px;
         display: flex;
         align-items: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 
         ion-thumbnail {
             border-radius: 50%;
-            background-color: #ccc;
             width: 60px;
             height: 60px;
         }

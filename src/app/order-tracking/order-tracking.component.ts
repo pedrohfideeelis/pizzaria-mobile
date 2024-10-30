@@ -12,7 +12,7 @@ export class OrderTrackingComponent implements OnInit {
   paymentMethod = '';
   totalAmount = 0;
   address = '';
-  deliveryTime = 'Hoje, 20:30 - 21:20';
+  deliveryTime = '';
   orderStatus = 'preparado';
 
   constructor(private router: Router, private navCtrl: NavController) {
@@ -32,13 +32,34 @@ export class OrderTrackingComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.calculateDeliveryTime();
+  }
 
   goBack() {
-    this.navCtrl.back();
+    this.router.navigate(['/tabs/home']);
   }
 
   openHelp() {
     // Implementação da função para abrir a ajuda
+  }
+
+  calculateDeliveryTime() {
+    const currentTime = new Date();
+
+    // Cálculo para 30 minutos
+    const deliveryStart = new Date(currentTime);
+    deliveryStart.setMinutes(currentTime.getMinutes() + 30);
+
+    // Cálculo para 40 minutos
+    const deliveryEnd = new Date(currentTime);
+    deliveryEnd.setMinutes(currentTime.getMinutes() + 40);
+
+    // Formatar para exibir apenas as horas e minutos
+    const options: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' };
+    const startFormatted = deliveryStart.toLocaleTimeString([], options);
+    const endFormatted = deliveryEnd.toLocaleTimeString([], options);
+
+    this.deliveryTime = `Hoje, ${startFormatted} - ${endFormatted}`;
   }
 }

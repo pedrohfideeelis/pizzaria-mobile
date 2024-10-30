@@ -13,19 +13,16 @@
 </ion-header>
 
 <ion-content>
-  <!-- Seção de Previsão de Entrega -->
   <div class="delivery-estimate">
     <div class="header">Previsão de entrega</div>
     <div class="time">{{ deliveryTime }}</div>
   </div>
 
-  <!-- Status do Pedido -->
   <div class="order-status">
     <ion-icon name="ellipse" color="warning"></ion-icon>
     <span>Seu pedido está sendo <strong>{{ orderStatus }}</strong></span>
   </div>
 
-  <!-- Endereço de Entrega -->
   <ion-card>
     <ion-card-header>Entregar em:</ion-card-header>
     <ion-card-content>
@@ -33,12 +30,11 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- Lista de Itens do Pedido -->
   <h2 class="section-title">Pedido</h2>
   <ion-list>
     <ion-item *ngFor="let item of orderItems">
       <ion-thumbnail slot="start">
-        <img [src]="item.imageUrl" />
+        <img [src]="item.pizza.imageUrl" />
       </ion-thumbnail>
       <ion-label>
         <h2>{{ item.pizza.name }} ({{ item.size }})</h2>
@@ -47,13 +43,11 @@
     </ion-item>
   </ion-list>
 
-  <!-- Valor Total do Pedido -->
   <ion-item lines="none">
     <ion-label>Total</ion-label>
     <ion-note slot="end">{{ totalAmount | currency : 'BRL' }}</ion-note>
   </ion-item>
 
-  <!-- Método de Pagamento -->
   <ion-item lines="none">
     <ion-label>Pagamento</ion-label>
     <ion-icon slot="end" name="logo-pix" color="success"></ion-icon>
