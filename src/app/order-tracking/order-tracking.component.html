@@ -19,8 +19,8 @@
   </div>
 
   <div class="order-status">
-    <ion-icon name="ellipse" color="warning"></ion-icon>
-    <span>Seu pedido está sendo <strong>{{ orderStatus }}</strong></span>
+    <ion-icon [color]="orderStatusColor" name="ellipse"></ion-icon>
+    <span>{{ orderStatus }}</span>
   </div>
 
   <ion-card>

@@ -13,7 +13,9 @@ export class OrderTrackingComponent implements OnInit {
   totalAmount = 0;
   address = '';
   deliveryTime = '';
-  orderStatus = 'preparado';
+  orderStatus = 'Seu pedido está sendo preparado';
+  orderStatusColor = 'danger';
+  statusInterval: any;
 
   constructor(private router: Router, private navCtrl: NavController) {
     const navigation = this.router.getCurrentNavigation();
@@ -34,6 +36,11 @@ export class OrderTrackingComponent implements OnInit {
 
   ngOnInit() {
     this.calculateDeliveryTime();
+    this.startStatusUpdate();
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.statusInterval);
   }
 
   goBack() {
@@ -61,5 +68,25 @@ export class OrderTrackingComponent implements OnInit {
     const endFormatted = deliveryEnd.toLocaleTimeString([], options);
 
     this.deliveryTime = `Hoje, ${startFormatted} - ${endFormatted}`;
+  }
+
+  startStatusUpdate() {
+    let count = 0;
+
+    this.statusInterval = setInterval(() => {
+      count++;
+
+      if (count === 1) {
+        this.orderStatus = 'Seu pedido está sendo preparado';
+        this.orderStatusColor = 'danger'; // Vermelho
+      } else if (count === 2) {
+        this.orderStatus = 'Seu pedido está a caminho';
+        this.orderStatusColor = 'warning'; // Amarelo
+      } else if (count === 3) {
+        this.orderStatus = 'Seu pedido chegou!';
+        this.orderStatusColor = 'success'; // Verde
+        clearInterval(this.statusInterval); // Para o intervalo após o último estado
+      }
+    }, 3000); // Intervalo de 30 segundos
   }
 }
