@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 import { OrderStatusService } from '../services/order-status.service';
 
 @Component({
@@ -10,54 +9,33 @@ import { OrderStatusService } from '../services/order-status.service';
 })
 export class OrderTrackingComponent implements OnInit {
   orderItems: any[] = [];
-  paymentMethod = '';
   totalAmount = 0;
   address = '';
+  paymentMethod = '';
   deliveryTime = '';
-  orderStatus = 'Seu pedido está sendo preparado';
-  orderStatusColor = 'danger';
-  statusInterval: any;
+  orderStatus = '';
+  orderStatusColor = '';
 
-  constructor(private router: Router, private navCtrl: NavController, private orderStatusService: OrderStatusService) {
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as {
-      orderItems: any[];
-      totalAmount: number;
-      address: string;
-      paymentMethod: string;
-    };
-
-    if (state) {
-      this.orderItems = state.orderItems;
-      this.totalAmount = state.totalAmount;
-      this.address = state.address;
-      this.paymentMethod = state.paymentMethod;
-    }
-  }
+  constructor(private router: Router, private orderStatusService: OrderStatusService) { }
 
   ngOnInit() {
+    // Obtenha os dados do pedido do serviço
     this.orderItems = this.orderStatusService.orderItems;
     this.totalAmount = this.orderStatusService.totalAmount;
     this.address = this.orderStatusService.address;
     this.paymentMethod = this.orderStatusService.paymentMethod;
 
-    this.orderStatusService.startStatusUpdate();
+    // Inicia a atualização do status somente uma vez
+    if (!this.orderStatusService.statusStarted) {
+      this.orderStatusService.startStatusUpdate();
+    }
+
+    // Subscreve ao status e à cor do status
     this.orderStatusService.orderStatus$.subscribe(status => this.orderStatus = status);
     this.orderStatusService.orderStatusColor$.subscribe(color => this.orderStatusColor = color);
 
+    // Calcula a previsão de entrega
     this.calculateDeliveryTime();
-  }
-
-  ngOnDestroy() {
-    this.orderStatusService.stopStatusUpdate();
-  }
-
-  goBack() {
-    this.router.navigate(['/tabs/home']);
-  }
-
-  openHelp() {
-    // Implementação da função para abrir a ajuda
   }
 
   calculateDeliveryTime() {
@@ -69,5 +47,9 @@ export class OrderTrackingComponent implements OnInit {
 
     const options: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' };
     this.deliveryTime = `Hoje, ${deliveryStart.toLocaleTimeString([], options)} - ${deliveryEnd.toLocaleTimeString([], options)}`;
+  }
+
+  goBack() {
+    this.router.navigate(['/tabs/home']);
   }
 }

@@ -16,43 +16,46 @@ export class OrderStatusService {
   address: string = '';
   paymentMethod: string = '';
   private statusInterval: any;
-  private statusStarted = false; // Controla se o status já foi iniciado
+  statusStarted = false;
+  private statusCount = 0; // Rastreia o número de atualizações de status
 
-  // Método para definir os dados do pedido
   setOrderData(orderItems: any[], totalAmount: number, address: string, paymentMethod: string) {
     this.orderItems = orderItems;
     this.totalAmount = totalAmount;
     this.address = address;
     this.paymentMethod = paymentMethod;
+    this.statusStarted = false;
+    this.statusCount = 0; // Reinicia o contador para um novo pedido
+    this.startStatusUpdate();
   }
 
-  // Retorna true se o pedido estiver em andamento e houver itens no pedido
   get isOrderInProgress(): boolean {
     return this.orderItems.length > 0 && this.orderStatusSubject.value !== 'Seu pedido chegou!';
   }
 
-  // Inicia a atualização do status, mas evita reinicialização se já estiver em andamento
   startStatusUpdate() {
     if (this.statusStarted) {
-      return; // Impede a reinicialização do status
+      return;
     }
     this.statusStarted = true;
 
-    let count = 0;
+    // Configura o intervalo com base no statusCount atual
     this.statusInterval = setInterval(() => {
-      count++;
-      if (count === 1) {
+      this.statusCount++;
+
+      if (this.statusCount === 1) {
         this.orderStatusSubject.next('Seu pedido está sendo preparado');
         this.orderStatusColorSubject.next('danger'); // Vermelho
-      } else if (count === 2) {
+      } else if (this.statusCount === 2) {
         this.orderStatusSubject.next('Seu pedido está a caminho');
         this.orderStatusColorSubject.next('warning'); // Amarelo
-      } else if (count === 3) {
+      } else if (this.statusCount === 3) {
         this.orderStatusSubject.next('Seu pedido chegou!');
         this.orderStatusColorSubject.next('success'); // Verde
-        clearInterval(this.statusInterval); // Para o intervalo após o último estado
+        clearInterval(this.statusInterval);
+        this.statusStarted = false;
       }
-    }, 30000); // Intervalo de 10 segundos
+    }, 10000); // Intervalo de 10 segundos
   }
 
   stopStatusUpdate() {
@@ -60,5 +63,14 @@ export class OrderStatusService {
       clearInterval(this.statusInterval);
       this.statusStarted = false;
     }
+  }
+
+  clearOrderData() {
+    this.orderItems = [];
+    this.totalAmount = 0;
+    this.address = '';
+    this.paymentMethod = '';
+    this.stopStatusUpdate();
+    this.statusCount = 0; // Reseta o contador para novos pedidos
   }
 }

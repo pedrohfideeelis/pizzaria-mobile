@@ -48,9 +48,9 @@ export class Home implements OnInit {
     }
 
     this.orderInProgress = this.orderStatusService.isOrderInProgress;
-    
-    this.orderStatusService.orderStatus$.subscribe(status => {
-      this.orderInProgress = status !== 'Seu pedido chegou!';
+
+    this.orderStatusService.orderStatus$.subscribe(() => {
+      this.orderInProgress = this.orderStatusService.isOrderInProgress;
     });
   }
 
