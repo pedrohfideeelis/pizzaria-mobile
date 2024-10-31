@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,15 @@ export class OrderStatusService {
   private statusInterval: any;
   statusStarted = false;
   private statusCount = 0; // Rastreia o número de atualizações de status
+
+  constructor(private cartService: CartService) {
+    // Limpa o carrinho quando o status do pedido chega ao estado final
+    this.orderStatus$.subscribe(status => {
+      if (status === 'Seu pedido chegou!') {
+        this.clearOrderData(); // Limpa os dados do pedido e o carrinho
+      }
+    });
+  }
 
   setOrderData(orderItems: any[], totalAmount: number, address: string, paymentMethod: string) {
     this.orderItems = orderItems;
@@ -70,6 +80,7 @@ export class OrderStatusService {
     this.totalAmount = 0;
     this.address = '';
     this.paymentMethod = '';
+    this.cartService.clearCart();
     this.stopStatusUpdate();
     this.statusCount = 0; // Reseta o contador para novos pedidos
   }
