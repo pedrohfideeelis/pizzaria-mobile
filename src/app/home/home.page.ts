@@ -47,6 +47,8 @@ export class Home implements OnInit {
       this.firstName = loggedInUser.name.split(' ')[0];
     }
 
+    this.orderInProgress = this.orderStatusService.isOrderInProgress;
+    
     this.orderStatusService.orderStatus$.subscribe(status => {
       this.orderInProgress = status !== 'Seu pedido chegou!';
     });

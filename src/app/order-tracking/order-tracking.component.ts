@@ -36,8 +36,6 @@ export class OrderTrackingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orderStatusService.startStatusUpdate();
-
     this.orderItems = this.orderStatusService.orderItems;
     this.totalAmount = this.orderStatusService.totalAmount;
     this.address = this.orderStatusService.address;
