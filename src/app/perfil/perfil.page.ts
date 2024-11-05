@@ -11,9 +11,9 @@ import { Order } from 'src/models/order.model';
 export class Perfil implements OnInit {
   perfilForm!: FormGroup;
   user: any;
-  pedidos: any[] = [];
+  pedidos: Order[] = [];
   editMode = false;
-  currentSection: string = 'meusDados'; // Define qual seção deve ser exibida
+  currentSection: string = 'meusDados';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +28,6 @@ export class Perfil implements OnInit {
       address: [{ value: '', disabled: true }]
     });
 
-    // Carregar usuário logado do localStorage
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
       this.user = JSON.parse(loggedInUser);
@@ -39,25 +38,12 @@ export class Perfil implements OnInit {
         phone: this.user.phone,
         address: this.user.address
       });
-
-      // Exemplo de carregamento de pedidos
-      this.pedidos = this.loadPedidos();
-
       this.cdr.detectChanges();
     } else {
       console.error('Nenhum usuário logado encontrado');
     }
 
     this.loadCompletedOrders();
-  }
-
-  loadPedidos() {
-    // Simulação de pedidos (pode ser substituído por requisição de API)
-    return [
-      { id: 1, status: 'Entregue', total: 49.99 },
-      { id: 2, status: 'Em preparação', total: 29.99 },
-      { id: 3, status: 'Entregue', total: 15.50 }
-    ];
   }
 
   onSave() {
@@ -120,6 +106,9 @@ export class Perfil implements OnInit {
 
   showSection(section: string) {
     this.currentSection = section;
+    if (section === 'pedidos') {
+      this.loadCompletedOrders();
+    }
   }
 
   loadCompletedOrders() {

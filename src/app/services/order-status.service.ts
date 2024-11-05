@@ -32,7 +32,7 @@ export class OrderStatusService {
           total: this.totalAmount,
           address: this.address,
           paymentMethod: this.paymentMethod,
-          status: 'concluído',
+          status: 'CONCLUÍDO',
           date: new Date().toISOString()
         });
         this.clearOrderData();
