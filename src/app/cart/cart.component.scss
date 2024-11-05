@@ -111,15 +111,15 @@ ion-content {
         color: #C2272D;
     }
 
-    .total {
+    .summary {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
         padding: 0 16px;
         margin-top: 20px;
 
         ion-label {
-            font-weight: bold;
+            font-weight: 500;
             font-size: 18px;
         }
 

@@ -38,11 +38,19 @@
     <ion-icon name="close-circle-outline"></ion-icon>
   </ion-button>
 
-  <div class="total">
-    <ion-label>Total</ion-label>
-    <ion-note>
-      {{ totalPrice | currency: 'BRL' }}
-    </ion-note>
+  <div class="summary">
+    <div>
+      <ion-label>Subtotal: </ion-label>
+      <ion-note>{{ originalPrice | currency: 'BRL' }}</ion-note>
+    </div>
+    <div *ngIf="isCouponApplied">
+      <ion-label>Desconto: </ion-label>
+      <ion-note>{{ discountAmount | currency: 'BRL' }}</ion-note>
+    </div>
+    <div>
+      <ion-label>Total: </ion-label>
+      <ion-note>{{ totalPrice | currency: 'BRL' }}</ion-note>
+    </div>
   </div>
 
   <div class="coupon-title">

@@ -65,6 +65,7 @@ export class CartComponent implements OnInit {
       } else if (result === 'used') {
         await this.showAlert('Cupom já utilizado', 'Este cupom já foi utilizado.');
       } else {
+        this.discountAmount = this.originalPrice - result;
         this.originalPrice = this.totalPrice; // Salva o preço original antes de aplicar o desconto
         this.totalPrice = result; // Atualiza o totalPrice com o desconto aplicado
         this.isCouponApplied = true; // Desativa o botão após aplicar o cupom
