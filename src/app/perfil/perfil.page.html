@@ -57,12 +57,19 @@
 
   <!-- Seção de Pedidos -->
   <div *ngIf="currentSection === 'pedidos'" class="pedidos-section">
-    <h4>Meus Pedidos</h4>
+    <h3>Meus Pedidos</h3>
     <ion-list>
-      <ion-item *ngFor="let pedido of pedidos">
-        <ion-label>
-          Pedido #{{pedido.id}} - {{pedido.status}} - Total: {{pedido.total | currency}}
-        </ion-label>
+      <ion-item *ngFor="let pedido of pedidos" class="pedido-item" lines="none">
+        <ion-card class="pedido-card">
+          <ion-card-header>
+            <ion-card-title>Pedido #{{pedido.id}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="status">CONCLUÍDO</p>
+            <p class="data">{{ pedido.date | date: 'dd/MM/yyyy - HH:mm' }}</p>
+            <p class="total">TOTAL <span>{{ pedido.total | currency: 'BRL' }}</span></p>
+          </ion-card-content>
+        </ion-card>
       </ion-item>
     </ion-list>
   </div>
