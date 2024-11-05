@@ -6,6 +6,13 @@ ion-content {
     justify-content: center;
     align-items: center;
     height: 100%;
+
+    .pedidos-section{
+        h4{
+            padding-left: 35px;
+            color: #C2272D;
+        }
+    }
 }
 
 .perfil-form {

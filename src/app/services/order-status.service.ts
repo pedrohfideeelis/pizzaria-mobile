@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CartService } from './cart.service';
+import { Order } from '../../models/order.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +19,23 @@ export class OrderStatusService {
   paymentMethod: string = '';
   private statusInterval: any;
   statusStarted = false;
-  private statusCount = 0; // Rastreia o número de atualizações de status
+  private statusCount = 0;
+  isOrderReceived = false;
 
   constructor(private cartService: CartService) {
     // Limpa o carrinho quando o status do pedido chega ao estado final
     this.orderStatus$.subscribe(status => {
-      if (status === 'Seu pedido chegou!') {
-        this.clearOrderData(); // Limpa os dados do pedido e o carrinho
+      if (status === 'Seu pedido chegou!' && !this.isOrderReceived) {
+        this.saveCompletedOrder({
+          id: new Date().getTime(),
+          items: this.orderItems,
+          total: this.totalAmount,
+          address: this.address,
+          paymentMethod: this.paymentMethod,
+          status: 'concluído',
+          date: new Date().toISOString()
+        });
+        this.clearOrderData();
       }
     });
   }
@@ -35,12 +46,13 @@ export class OrderStatusService {
     this.address = address;
     this.paymentMethod = paymentMethod;
     this.statusStarted = false;
-    this.statusCount = 0; // Reinicia o contador para um novo pedido
+    this.statusCount = 0;
+    this.isOrderReceived = false;
     this.startStatusUpdate();
   }
 
   get isOrderInProgress(): boolean {
-    return this.orderItems.length > 0 && this.orderStatusSubject.value !== 'Seu pedido chegou!';
+    return this.orderItems.length > 0 && this.orderStatusSubject.value !== 'Seu pedido chegou!' && !this.isOrderReceived;
   }
 
   startStatusUpdate() {
@@ -75,6 +87,17 @@ export class OrderStatusService {
     }
   }
 
+  confirmOrderReceived() {
+    this.isOrderReceived = true;
+    this.clearOrderData();
+  }
+
+  private saveCompletedOrder(order: Order) {
+    let completedOrders: Order[] = JSON.parse(localStorage.getItem('completedOrders') || '[]');
+    completedOrders.push(order);
+    localStorage.setItem('completedOrders', JSON.stringify(completedOrders));
+  }
+
   clearOrderData() {
     this.orderItems = [];
     this.totalAmount = 0;
@@ -82,6 +105,6 @@ export class OrderStatusService {
     this.paymentMethod = '';
     this.cartService.clearCart();
     this.stopStatusUpdate();
-    this.statusCount = 0; // Reseta o contador para novos pedidos
+    this.statusCount = 0;
   }
 }
