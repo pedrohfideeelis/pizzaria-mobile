@@ -9,7 +9,8 @@ import { OrderStatusService } from '../services/order-status.service';
 })
 export class OrderTrackingComponent implements OnInit {
   orderItems: any[] = [];
-  totalAmount = 0;
+  storedTotal = localStorage.getItem('cartTotal');
+  totalAmount: number = this.storedTotal ? parseFloat(this.storedTotal) : 0;
   address = '';
   paymentMethod = '';
   deliveryTime = '';

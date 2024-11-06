@@ -31,15 +31,7 @@
       <ion-label>
         <h2>{{ item.pizza.name }} ({{ item.size }})</h2>
         <h3>{{ item.totalPrice | currency : 'BRL' }}</h3>
-        <div class="quantity-control">
-          <ion-button (click)="decreaseQuantity(item)" [disabled]="item.quantity <= 1">-</ion-button>
-          <ion-badge>{{ item.quantity }}</ion-badge>
-          <ion-button (click)="increaseQuantity(item)">+</ion-button>
-        </div>
       </ion-label>
-      <ion-button (click)="removeItem(item)">
-        <ion-icon name="trash-outline"></ion-icon>
-      </ion-button>
     </ion-item>
   </ion-list>
 
