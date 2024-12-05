@@ -16,7 +16,7 @@ export class CheckoutComponent implements OnInit {
   paymentMethod: string = 'PIX';
   showAddressModal: boolean = false;
   newAddress = "";
-  storedTotal = localStorage.getItem('cartTotal');
+  storedTotal = localStorage.getItem('total');
   totalAmount: number = this.storedTotal ? parseFloat(this.storedTotal) : 0;
 
   constructor(
