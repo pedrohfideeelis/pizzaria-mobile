@@ -32,6 +32,8 @@ export class CheckoutComponent implements OnInit {
     this.cartItems = this.cartService.getCartItems();
     const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
     this.address = user.address || 'Endereço não disponível';
+    const storedTotal = localStorage.getItem('cartTotal');
+    this.totalAmount = storedTotal ? parseFloat(storedTotal) : 0;
   }
 
   goBack() {
@@ -107,6 +109,7 @@ export class CheckoutComponent implements OnInit {
             };
             this.orderStatusService.setOrderData(this.cartItems, this.totalAmount, this.address, this.paymentMethod);
             this.router.navigate(['order-tracking'], navigationExtras);
+            localStorage.removeItem('cartTotal');
           }
         }
       ]

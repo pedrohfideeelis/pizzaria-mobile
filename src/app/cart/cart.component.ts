@@ -110,6 +110,11 @@ export class CartComponent implements OnInit {
     await alert.present();
   }
 
+  updateTotal() {
+    this.totalPrice = this.cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
+    localStorage.setItem('cartTotal', this.totalPrice.toString()); // Salva o total no LocalStorage
+  }
+
   closeCart() {
     this.modalCtrl.dismiss();
   }

@@ -21,8 +21,10 @@ export class OrderTrackingComponent implements OnInit {
 
   ngOnInit() {
     // Obtenha os dados do pedido do serviço
+    const storedTotal = localStorage.getItem('cartTotal');
+    this.totalAmount = storedTotal ? parseFloat(storedTotal) : 0;
     this.orderItems = this.orderStatusService.orderItems;
-    this.totalAmount = this.orderStatusService.totalAmount;
+    //this.totalAmount = this.orderStatusService.totalAmount;
     this.address = this.orderStatusService.address;
     this.paymentMethod = this.orderStatusService.paymentMethod;
 
